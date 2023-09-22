@@ -1,4 +1,22 @@
 <resources>
     <string name="app_name">Touch Games</string>
     <string name="logo_description_accessibility">Logo do aplicativo retratando um dedo tocando a tela</string>
+
+    <string name="available_games">Jogos Disponíveis</string>
+    <string name="coming_soon_games">Em breve...</string>
+
+    <!-- GAMES NAME -->
+    <string name="guess_the_number">Adivinhe o Número</string>
+
+    <!-- GAME - GUESS THE NUMBER (GTN) -->
+    <string name="gtn_game_title">Adivinhe o Número</string>
+    <string name="gtn_select_difficulty">Selecione a dificuldade</string>
+    <string name="gtn_easy">FÁCIL</string>
+    <string name="gtn_medium">MÉDIO</string>
+    <string name="gtn_hard">DIFÍCIL</string>
+    <string name="gtn_insane">INSANO</string>
+    <string name="gtn_how_to_play">Como Jogar</string>
+
+    <!-- GENERAL -->
+    <string name="back_main_screen">Voltar a tela inicial</string>
 </resources>
