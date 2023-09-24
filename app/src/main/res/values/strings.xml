@@ -11,10 +11,10 @@
     <!-- GAME - GUESS THE NUMBER (GTN) -->
     <string name="gtn_game_title">Adivinhe o Número</string>
     <string name="gtn_select_difficulty">Selecione a dificuldade</string>
-    <string name="gtn_easy">FÁCIL</string>
-    <string name="gtn_medium">MÉDIO</string>
-    <string name="gtn_hard">DIFÍCIL</string>
-    <string name="gtn_insane">INSANO</string>
+    <string name="gtn_easy">FÁCIL (1 a 5)</string>
+    <string name="gtn_medium">MÉDIO (1 a 10)</string>
+    <string name="gtn_hard">DIFÍCIL (1 a 50)</string>
+    <string name="gtn_insane">INSANO (1 a 100)</string>
     <string name="gtn_how_to_play">Como Jogar</string>
 
     <!-- GENERAL -->

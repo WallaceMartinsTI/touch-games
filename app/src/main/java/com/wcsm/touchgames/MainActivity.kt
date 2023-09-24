@@ -13,10 +13,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val btnOpenGuessTheNumber: Button = findViewById(R.id.btn_open_guess_the_number)
+
         btnOpenGuessTheNumber.setOnClickListener {
             val intent = Intent(this, GuessTheNumberMenuActivity::class.java)
 
             startActivity(intent)
+            println("Rodou!")
         }
 
     }
