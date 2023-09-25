@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, GuessTheNumberMenuActivity::class.java)
 
             startActivity(intent)
-            println("Rodou!")
         }
 
     }

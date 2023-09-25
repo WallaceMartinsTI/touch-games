@@ -5,6 +5,8 @@
     <string name="available_games">Jogos Disponíveis</string>
     <string name="coming_soon_games">Em breve...</string>
 
+    <string name="about_app">SOBRE</string>
+
     <!-- GAMES NAME -->
     <string name="guess_the_number">Adivinhe o Número</string>
 

@@ -7,6 +7,7 @@ import android.widget.Button
 import android.content.Intent
 
 class GuessTheNumberMenuActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_guess_the_number_menu)
@@ -18,31 +19,34 @@ class GuessTheNumberMenuActivity : AppCompatActivity() {
         val btnHardDifficult: Button = findViewById(R.id.btn_hard_difficult)
         val btnInsaneDifficult: Button = findViewById(R.id.btn_insane_difficult)
 
-        //val intent = Intent(this, GuessTheNumberGameActivity::class.java)
+        val intent = Intent(this, GuessTheNumberGameActivity::class.java)
 
         btnBackToMainMenu.setOnClickListener {
             finish()
         }
 
         // Difficult Buttons
-        /*
         btnEasyDifficult.setOnClickListener {
-            intent.putExtra("difficulty", "easy")
+            startGame(intent, Difficulties.EASY)
         }
 
         btnMediumDifficult.setOnClickListener {
-            intent.putExtra("difficulty", "medium")
+            startGame(intent, Difficulties.MEDIUM)
         }
 
         btnHardDifficult.setOnClickListener {
-            intent.putExtra("difficulty", "hard")
+            startGame(intent, Difficulties.HARD)
         }
 
         btnInsaneDifficult.setOnClickListener {
-            intent.putExtra("difficulty", "insane")
+            startGame(intent,  Difficulties.INSANE)
         }
-
-        startActivity(intent)
-        */
     }
+
+    private fun startGame(intent: Intent, difficulty: Difficulties) {
+        intent.putExtra("difficulty", difficulty.difficultyCode)
+        startActivity(intent)
+    }
+
+
 }
