@@ -1,11 +1,13 @@
 package com.wcsm.touchgames.guessthenumber
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.wcsm.touchgames.R
 import com.google.android.material.textfield.TextInputEditText
 import android.widget.Button
 import android.widget.TextView
+import kotlin.random.Random
 
 class GuessTheNumberGameActivity : AppCompatActivity() {
 
@@ -19,16 +21,46 @@ class GuessTheNumberGameActivity : AppCompatActivity() {
 
 
         val guessInputText: TextInputEditText = findViewById(R.id.guess_input_text)
+
         val btnGuess: Button = findViewById(R.id.btn_guess)
+        val btnNewGame: Button = findViewById(R.id.btn_new_game)
         val btnPreviousScreen: Button = findViewById(R.id.btn_previous_screen)
 
 
-        val attemptsQuantity: TextView = findViewById(R.id.attempts_quantity)
+        val attemptsQuantityField: TextView = findViewById(R.id.attempts_quantity)
+
+        val winTextField: TextView = findViewById(R.id.win_text)
 
         val guess = guessInputText.text
 
-        btnGuess.setOnClickListener {
+        var randomNumber = generateRandomNumber(difficulty)
 
+        var attempts = 0
+
+        // Clear all states for the New Game
+        btnNewGame.setOnClickListener {
+            attempts = 0
+            btnGuess.isEnabled = true
+            winTextField.text = ""
+            guessInputText.text?.clear()
+            attemptsQuantityField.text = attempts.toString()
+            randomNumber = generateRandomNumber(difficulty)
+        }
+
+        btnGuess.setOnClickListener {
+            val userGuess = guessInputText.text.toString().toInt()
+            if (userGuess == randomNumber) {
+                winTextField.text = when (attempts) {
+                    0 -> "Parabéns! Você acertou na PRIMEIRA TENTATIVA!!!"
+                    1 -> "Parabens! Você acertou após $attempts tentativa!"
+                    else -> "Parabens! Você acertou após $attempts tentativas!"
+                }
+                btnGuess.isEnabled = false
+            } else {
+                ++attempts
+                attemptsQuantityField.text = attempts.toString()
+                guessInputText.text?.clear()
+            }
         }
 
         btnPreviousScreen.setOnClickListener {
@@ -36,6 +68,17 @@ class GuessTheNumberGameActivity : AppCompatActivity() {
         }
 
         setDifficultyChoosen(difficulty)
+
+    }
+    private fun generateRandomNumber(difficulty: String?): Int {
+        val max = when (difficulty) {
+            "easy" -> 5
+            "medium" -> 10
+            "hard" -> 50
+            "insane" -> 100
+            else -> 0
+        }
+        return Random.nextInt(1, max + 1)
     }
 
     private fun setDifficultyChoosen(difficulty: String?) {

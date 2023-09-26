@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
+        app:layout_constraintGuide_percent="0.75" />
 
     <Button
         android:id="@+id/btn_easy_difficult"
@@ -91,34 +91,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_hard_difficult" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.80" />
-
-    <Button
-        android:id="@+id/button20"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="@string/gtn_how_to_play"
-        android:backgroundTint="#174580"
-        app:layout_constraintBottom_toTopOf="@+id/guideline4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3" />
-
     <Button
         android:id="@+id/btn_gtn_back_menu"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="@string/back_main_screen"
         android:backgroundTint="@color/btn_back_main_screen"
+        android:text="@string/back_main_screen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

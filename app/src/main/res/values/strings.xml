@@ -17,8 +17,8 @@
     <string name="gtn_medium">MÉDIO (1 a 10)</string>
     <string name="gtn_hard">DIFÍCIL (1 a 50)</string>
     <string name="gtn_insane">INSANO (1 a 100)</string>
-    <string name="gtn_how_to_play">Como Jogar</string>
 
     <!-- GENERAL -->
     <string name="back_main_screen">Voltar a tela inicial</string>
+
 </resources>
