@@ -1,6 +1,6 @@
 package com.wcsm.touchgames.guessthenumber
 
-enum class Difficulties(val difficultyCode: String) {
+enum class GTNDifficulties(val difficultyCode: String) {
     EASY("easy"),
     MEDIUM("medium"),
     HARD("hard"),

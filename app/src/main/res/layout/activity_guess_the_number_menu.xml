@@ -28,6 +28,7 @@
         android:text="@string/gtn_select_difficulty"
         android:textColor="@color/subtitleColor"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,40 +49,40 @@
         app:layout_constraintGuide_percent="0.75" />
 
     <Button
-        android:id="@+id/btn_easy_difficult"
+        android:id="@+id/gtn_btn_easy_difficult"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="@string/gtn_easy"
-        app:layout_constraintBottom_toTopOf="@+id/btn_medium_difficult"
+        app:layout_constraintBottom_toTopOf="@+id/gtn_btn_medium_difficult"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <Button
-        android:id="@+id/btn_medium_difficult"
+        android:id="@+id/gtn_btn_medium_difficult"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="@string/gtn_medium"
-        app:layout_constraintBottom_toTopOf="@+id/btn_hard_difficult"
+        app:layout_constraintBottom_toTopOf="@+id/gtn_btn_hard_difficult"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_easy_difficult" />
+        app:layout_constraintTop_toBottomOf="@+id/gtn_btn_easy_difficult" />
 
     <Button
-        android:id="@+id/btn_hard_difficult"
+        android:id="@+id/gtn_btn_hard_difficult"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="@string/gtn_hard"
-        app:layout_constraintBottom_toTopOf="@+id/btn_insane_difficult"
+        app:layout_constraintBottom_toTopOf="@+id/gtn_btn_insane_difficult"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_medium_difficult" />
+        app:layout_constraintTop_toBottomOf="@+id/gtn_btn_medium_difficult" />
 
     <Button
-        android:id="@+id/btn_insane_difficult"
+        android:id="@+id/gtn_btn_insane_difficult"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="@string/gtn_insane"
@@ -89,10 +90,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_hard_difficult" />
+        app:layout_constraintTop_toBottomOf="@+id/gtn_btn_hard_difficult" />
 
     <Button
-        android:id="@+id/btn_gtn_back_menu"
+        android:id="@+id/gtn_btn_back_main_screen"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/btn_back_main_screen"

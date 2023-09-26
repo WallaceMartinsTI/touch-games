@@ -1,6 +1,5 @@
 package com.wcsm.touchgames.guessthenumber
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.wcsm.touchgames.R
@@ -20,18 +19,17 @@ class GuessTheNumberGameActivity : AppCompatActivity() {
         val difficulty = bundle?.getString("difficulty")
 
 
-        val guessInputText: TextInputEditText = findViewById(R.id.guess_input_text)
+        val guessInputText: TextInputEditText = findViewById(R.id.gtn_guess_input_text)
 
-        val btnGuess: Button = findViewById(R.id.btn_guess)
-        val btnNewGame: Button = findViewById(R.id.btn_new_game)
-        val btnPreviousScreen: Button = findViewById(R.id.btn_previous_screen)
+        val btnGuess: Button = findViewById(R.id.gtn_btn_guess)
+        val btnNewGame: Button = findViewById(R.id.gtn_btn_new_game)
+        val btnPreviousScreen: Button = findViewById(R.id.gtn_btn_previous_screen)
 
 
         val attemptsQuantityField: TextView = findViewById(R.id.attempts_quantity)
 
-        val winTextField: TextView = findViewById(R.id.win_text)
+        val winTextField: TextView = findViewById(R.id.gtn_win_text)
 
-        val guess = guessInputText.text
 
         var randomNumber = generateRandomNumber(difficulty)
 
@@ -82,7 +80,7 @@ class GuessTheNumberGameActivity : AppCompatActivity() {
     }
 
     private fun setDifficultyChoosen(difficulty: String?) {
-        val difficultyChosenField: TextView = findViewById(R.id.difficulty_chosen)
+        val difficultyChosenField: TextView = findViewById(R.id.gtn_difficulty_chosen)
 
         if (difficulty != null) {
             difficultyChosenField.text = when (difficulty) {

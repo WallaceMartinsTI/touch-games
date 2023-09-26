@@ -85,13 +85,13 @@
                 android:text="@string/guess_the_number" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/btn_open_jokenpo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
-                android:text="@string/coming_soon_games" />
+                android:text="@string/jokenpo" />
 
             <Button
                 android:id="@+id/button4"

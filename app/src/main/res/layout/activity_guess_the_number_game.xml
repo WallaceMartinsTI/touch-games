@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/difficulty_chosen"
+        android:id="@+id/gtn_difficulty_chosen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/subtitleColor"
@@ -54,14 +54,15 @@
         app:layout_constraintTop_toTopOf="@+id/guideline5">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/guess_input_text"
+            android:id="@+id/gtn_guess_input_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Palpite" />
+            android:hint="Palpite"
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btn_guess"
+        android:id="@+id/gtn_btn_guess"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Palpitar"
@@ -108,18 +109,18 @@
         app:layout_constraintTop_toTopOf="@+id/textView8" />
 
     <Button
-        android:id="@+id/btn_new_game"
+        android:id="@+id/gtn_btn_new_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Novo Jogo"
-        app:layout_constraintBottom_toTopOf="@+id/btn_previous_screen"
+        app:layout_constraintBottom_toTopOf="@+id/gtn_btn_previous_screen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
     <Button
-        android:id="@+id/btn_previous_screen"
+        android:id="@+id/gtn_btn_previous_screen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
@@ -144,7 +145,7 @@
         app:layout_constraintGuide_percent="0.60" />
 
     <TextView
-        android:id="@+id/win_text"
+        android:id="@+id/gtn_win_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

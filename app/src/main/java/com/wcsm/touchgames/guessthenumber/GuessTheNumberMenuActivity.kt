@@ -12,12 +12,12 @@ class GuessTheNumberMenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_guess_the_number_menu)
 
-        val btnBackToMainMenu: Button = findViewById(R.id.btn_gtn_back_menu)
+        val btnEasyDifficult: Button = findViewById(R.id.gtn_btn_easy_difficult)
+        val btnMediumDifficult: Button = findViewById(R.id.gtn_btn_medium_difficult)
+        val btnHardDifficult: Button = findViewById(R.id.gtn_btn_hard_difficult)
+        val btnInsaneDifficult: Button = findViewById(R.id.gtn_btn_insane_difficult)
 
-        val btnEasyDifficult: Button = findViewById(R.id.btn_easy_difficult)
-        val btnMediumDifficult: Button = findViewById(R.id.btn_medium_difficult)
-        val btnHardDifficult: Button = findViewById(R.id.btn_hard_difficult)
-        val btnInsaneDifficult: Button = findViewById(R.id.btn_insane_difficult)
+        val btnBackToMainMenu: Button = findViewById(R.id.gtn_btn_back_main_screen)
 
         val intent = Intent(this, GuessTheNumberGameActivity::class.java)
 
@@ -27,23 +27,23 @@ class GuessTheNumberMenuActivity : AppCompatActivity() {
 
         // Difficult Buttons
         btnEasyDifficult.setOnClickListener {
-            startGame(intent, Difficulties.EASY)
+            startGame(intent, GTNDifficulties.EASY)
         }
 
         btnMediumDifficult.setOnClickListener {
-            startGame(intent, Difficulties.MEDIUM)
+            startGame(intent, GTNDifficulties.MEDIUM)
         }
 
         btnHardDifficult.setOnClickListener {
-            startGame(intent, Difficulties.HARD)
+            startGame(intent, GTNDifficulties.HARD)
         }
 
         btnInsaneDifficult.setOnClickListener {
-            startGame(intent,  Difficulties.INSANE)
+            startGame(intent,  GTNDifficulties.INSANE)
         }
     }
 
-    private fun startGame(intent: Intent, difficulty: Difficulties) {
+    private fun startGame(intent: Intent, difficulty: GTNDifficulties) {
         intent.putExtra("difficulty", difficulty.difficultyCode)
         startActivity(intent)
     }

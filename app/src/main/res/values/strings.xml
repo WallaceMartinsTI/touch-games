@@ -9,6 +9,7 @@
 
     <!-- GAMES NAME -->
     <string name="guess_the_number">Adivinhe o Número</string>
+    <string name="jokenpo">Jokenpo</string>
 
     <!-- GAME - GUESS THE NUMBER (GTN) -->
     <string name="gtn_game_title">Adivinhe o Número</string>
@@ -17,6 +18,18 @@
     <string name="gtn_medium">MÉDIO (1 a 10)</string>
     <string name="gtn_hard">DIFÍCIL (1 a 50)</string>
     <string name="gtn_insane">INSANO (1 a 100)</string>
+
+    <!-- GAME - JOKENPO (JKP) -->
+    <string name="jkp_game_title">Jokenpo</string>
+    <string name="jkp_app_choice">Escolha do App</string>
+    <string name="jkp_player_choice">Escolha uma opção abaixo</string>
+    <string name="jkp_result">Resultado</string>
+    <string name="jkp_player_win">Você Ganhou :)</string>
+    <string name="jkp_app_win">O App Ganhou :(</string>
+    <string name="jkp_draw">Empatou :|</string>
+    <string name="jkp_restart">Reiniciar</string>
+    <string name="jkp_app_points">Pontos do App:</string>
+    <string name="jkp_player_points">Pontos Jogador:</string>
 
     <!-- GENERAL -->
     <string name="back_main_screen">Voltar a tela inicial</string>
