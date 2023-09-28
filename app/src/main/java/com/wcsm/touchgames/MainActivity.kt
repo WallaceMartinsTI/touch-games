@@ -8,7 +8,11 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.wcsm.touchgames.guessthenumber.GuessTheNumberMenuActivity
 import com.wcsm.touchgames.jokenpo.JokenpoActivity
 
+import com.google.gson.Gson
+
 class MainActivity : AppCompatActivity() {
+
+    var arr = arrayListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Disable DARK MODE
@@ -32,5 +36,37 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // JSON
+        val assetManager = assets
+        val inputStream = assetManager.open("words.json")
+        val json = inputStream.bufferedReader().use { it.readText() }
+
+        data class Words(
+            val worldCountries: List<String>,
+            val famousCitiesInTheWorld: List<String>,
+            val animals: List<String>,
+            val foods: List<String>,
+            val movieCharacters: List<String>,
+            val sports: List<String>,
+            val christmasWords: List<String>,
+            val professions: List<String>,
+            val brandsAnCompanies: List<String>,
+            val soccerTeams: List<String>,
+            val celebrityNames: List<String>,
+            val colors: List<String>,
+            val heroes: List<String>,
+            val techs: List<String>,
+            val villains: List<String>,
+        )
+
+        val gson = Gson()
+        val words = gson.fromJson(json, Words::class.java)
+
+        println("=========================================================================")
+        println(words.animals)
+        // [Leão, Elefante, Girafa, Tigre, Cachorro, Gato, Zebra, Urso, Tubarão, Golfinho, Águia, Tartaruga, Crocodilo, Panda, Cavalo]
+        // Entendido, continuar daqui!
     }
+
+
 }
