@@ -6,6 +6,7 @@ import com.wcsm.touchgames.R
 import com.google.android.material.textfield.TextInputEditText
 import android.widget.Button
 import android.widget.TextView
+import com.google.android.material.textfield.TextInputLayout
 import kotlin.random.Random
 
 class GuessTheNumberGameActivity : AppCompatActivity() {
@@ -20,6 +21,7 @@ class GuessTheNumberGameActivity : AppCompatActivity() {
 
 
         val guessInputText: TextInputEditText = findViewById(R.id.gtn_guess_input_text)
+        val guessTextInputLayout: TextInputLayout = findViewById(R.id.gtn_text_input_layout)
 
         val btnGuess: Button = findViewById(R.id.gtn_btn_guess)
         val btnNewGame: Button = findViewById(R.id.gtn_btn_new_game)
@@ -46,18 +48,26 @@ class GuessTheNumberGameActivity : AppCompatActivity() {
         }
 
         btnGuess.setOnClickListener {
-            val userGuess = guessInputText.text.toString().toInt()
-            if (userGuess == randomNumber) {
-                winTextField.text = when (attempts) {
-                    0 -> "Parabéns! Você acertou na PRIMEIRA TENTATIVA!!!"
-                    1 -> "Parabens! Você acertou após $attempts tentativa!"
-                    else -> "Parabens! Você acertou após $attempts tentativas!"
-                }
-                btnGuess.isEnabled = false
+            val userGuessInputed = guessInputText.text.toString()
+
+            if (userGuessInputed.isEmpty()) {
+                guessTextInputLayout.error = "Este campo é obrigatório"
             } else {
-                ++attempts
-                attemptsQuantityField.text = attempts.toString()
-                guessInputText.text?.clear()
+                guessTextInputLayout.error = null
+
+                val userGuess = userGuessInputed.toInt()
+                if (userGuess == randomNumber) {
+                    winTextField.text = when (attempts) {
+                        0 -> "Parabéns! Você acertou na PRIMEIRA TENTATIVA!!!"
+                        1 -> "Parabens! Você acertou após $attempts tentativa!"
+                        else -> "Parabens! Você acertou após $attempts tentativas!"
+                    }
+                    btnGuess.isEnabled = false
+                } else {
+                    ++attempts
+                    attemptsQuantityField.text = attempts.toString()
+                    guessInputText.text?.clear()
+                }
             }
         }
 
