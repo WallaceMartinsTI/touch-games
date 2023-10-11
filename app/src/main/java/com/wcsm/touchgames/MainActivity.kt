@@ -9,14 +9,13 @@ import com.wcsm.touchgames.guessthenumber.GuessTheNumberMenuActivity
 import com.wcsm.touchgames.jokenpo.JokenpoActivity
 
 import com.google.gson.Gson
+import com.wcsm.touchgames.memorygame.MemoryGameMenuActivity
 
 class MainActivity : AppCompatActivity() {
 
     var arr = arrayListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Disable DARK MODE
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         // Open Games Buttons
         val btnOpenGuessTheNumber: Button = findViewById(R.id.btn_open_guess_the_number)
         val btnOpenJokenpo: Button = findViewById(R.id.btn_open_jokenpo)
+        val btnOpenMemoryGame: Button = findViewById(R.id.btn_open_memory_game)
 
 
         btnOpenGuessTheNumber.setOnClickListener {
@@ -33,6 +33,11 @@ class MainActivity : AppCompatActivity() {
 
         btnOpenJokenpo.setOnClickListener {
             val intent = Intent(this, JokenpoActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnOpenMemoryGame.setOnClickListener {
+            val intent = Intent(this, MemoryGameMenuActivity::class.java)
             startActivity(intent)
         }
 

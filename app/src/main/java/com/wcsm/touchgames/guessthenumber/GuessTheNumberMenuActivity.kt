@@ -47,6 +47,4 @@ class GuessTheNumberMenuActivity : AppCompatActivity() {
         intent.putExtra("difficulty", difficulty.difficultyCode)
         startActivity(intent)
     }
-
-
 }
