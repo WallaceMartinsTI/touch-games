@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/mg_card_default"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="8dp"
