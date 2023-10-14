@@ -68,5 +68,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline15" />
+        app:layout_constraintTop_toTopOf="@+id/guideline15"
+        tools:itemCount="6"
+        tools:layoutManager="GridLayoutManager"
+        tools:listitem="@layout/mg_cards"
+        tools:spanCount="5" />
 </androidx.constraintlayout.widget.ConstraintLayout>
