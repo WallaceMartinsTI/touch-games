@@ -1,3 +1,2 @@
-alinhar o grid no meio da tela e
 diminuir o tamanho da imagem para
 caber 12 imagens na tela
