@@ -14,7 +14,7 @@ class CardsAdapter(
 
     inner class CardsViewHolder(val itemView: View) : ViewHolder(itemView) {
 
-        val cardDefault: ImageView = itemView.findViewById(R.id.mg_card_default)
+        private val cardDefault: ImageView = itemView.findViewById(R.id.mg_card_default)
 
         fun bind(card: Card) {
             //imageApp.setImageResource(R.drawable.jkp_paper)
@@ -29,6 +29,7 @@ class CardsAdapter(
     }
 
     override fun onBindViewHolder(holder: CardsViewHolder, position: Int) {
+
         val card = list[position]
         holder.bind(card)
     }
@@ -36,4 +37,5 @@ class CardsAdapter(
     override fun getItemCount(): Int {
         return list.size
     }
+
 }
