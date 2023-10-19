@@ -2,6 +2,7 @@ package com.wcsm.touchgames.memorygame
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,9 +43,17 @@ class MemoryGameGameActivity : AppCompatActivity() {
 
         )
 
-        val shuffledCards = cards.shuffled().toMutableList()
-        rvContainer.adapter = CardsAdapter(shuffledCards)
+        // Método Original
+        //val shuffledCards = cards.shuffled().toMutableList()
+        //rvContainer.adapter = CardsAdapter(shuffledCards)
+
+        // Testes
+        val treatedCards = cards.toMutableList()
+        rvContainer.adapter = CardsAdapter(treatedCards)
 
         rvContainer.layoutManager = GridLayoutManager(this, 4)
+
+        // Separar no LOG Temporário
+        Log.i("MEMORY_GAME", "==========================================================================================================")
     }
 }
