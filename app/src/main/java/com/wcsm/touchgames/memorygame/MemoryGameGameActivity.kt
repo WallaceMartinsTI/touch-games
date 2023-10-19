@@ -22,15 +22,22 @@ class MemoryGameGameActivity : AppCompatActivity() {
 
         val cards = listOf(
             Card(R.drawable.mg_audiotrack_24),
+            Card(R.drawable.mg_audiotrack_24),
             Card(R.drawable.mg_celebration_24),
+            Card(R.drawable.mg_celebration_24),
+            /*Card(R.drawable.mg_star_24),
             Card(R.drawable.mg_star_24),
             Card(R.drawable.mg_sports_motorsports_24),
+            Card(R.drawable.mg_sports_motorsports_24),
             Card(R.drawable.mg_vpn_key_24),
-            Card(R.drawable.mg_work_24)
+            Card(R.drawable.mg_vpn_key_24),
+            Card(R.drawable.mg_work_24),
+            Card(R.drawable.mg_work_24)*/
         )
 
-        rvContainer.adapter = CardsAdapter(cards)
+        val shuffledCards = cards.shuffled().toMutableList()
+        rvContainer.adapter = CardsAdapter(shuffledCards)
 
-        rvContainer.layoutManager = GridLayoutManager(this, 2)
+        rvContainer.layoutManager = GridLayoutManager(this, 4)
     }
 }
