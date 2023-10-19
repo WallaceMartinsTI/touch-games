@@ -23,16 +23,23 @@ class MemoryGameGameActivity : AppCompatActivity() {
         val cards = listOf(
             Card(R.drawable.mg_audiotrack_24),
             Card(R.drawable.mg_audiotrack_24),
+
             Card(R.drawable.mg_celebration_24),
             Card(R.drawable.mg_celebration_24),
             /*Card(R.drawable.mg_star_24),
             Card(R.drawable.mg_star_24),
+            Card(R.drawable.mg_star_24),
             Card(R.drawable.mg_sports_motorsports_24),
+
             Card(R.drawable.mg_sports_motorsports_24),
             Card(R.drawable.mg_vpn_key_24),
             Card(R.drawable.mg_vpn_key_24),
             Card(R.drawable.mg_work_24),
             Card(R.drawable.mg_work_24)*/
+
+            //Card(R.drawable.mg_vpn_key_24),
+            //Card(R.drawable.mg_work_24)
+
         )
 
         val shuffledCards = cards.shuffled().toMutableList()

@@ -37,7 +37,7 @@
 
     <!-- GAME - MEMORY GAME -->
     <string name="mg_game_title">Jogo da Memória</string>
-    <string name="mg_easy">FÁCIL (6 pares)</string>
+    <string name="mg_easy">FÁCIL (4 pares)</string>
     <string name="mg_medium">MÉDIO (8 pares)</string>
     <string name="mg_hard">DIFÍCIL (12 pares)</string>
 

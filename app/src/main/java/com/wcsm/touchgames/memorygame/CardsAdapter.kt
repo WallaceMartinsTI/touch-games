@@ -15,6 +15,8 @@ class CardsAdapter(
 ) : Adapter<CardsAdapter.CardsViewHolder>() {
 
     private val initialCard = Card(0)
+    private var plays = 0
+    private var cardsMatched = false
 
     private var selectedCard = initialCard;
     private var previousItemView: View? = null
@@ -24,6 +26,7 @@ class CardsAdapter(
         private val cardDefault: ImageView = itemView.findViewById(R.id.mg_card_default)
 
         fun bind(card: Card, pos: Int) {
+
             cardDefault.setImageResource(R.drawable.mg_square_24) // código para mostrar os quadrados (carta pra baixo)
             //cardDefault.setImageResource(card.imageSrc) // código para mostrar os cards
             //Log.i("MEMORY_GAME", "listReceived: $initialList")
@@ -46,12 +49,24 @@ class CardsAdapter(
                     itemView.isEnabled = false
 
                     previousItemView = null
+
+                    cardsMatched = true
                 } else {
                     previousItemView = itemView
                     selectedCard = card
                     Log.i("MEMORY_GAME", "${card.imageSrc} NÃO ESTAVA NO ARRAY E FOI ADICIONADO")
                 }
+
+                plays++
+
+                if(plays == 2 && cardsMatched == true) {
+                    // SOMAR PONTOS ou GANHAR TEMPO
+                }
+
             }
+
+
+
 
         }
     }
@@ -64,13 +79,11 @@ class CardsAdapter(
 
     override fun onBindViewHolder(holder: CardsViewHolder, position: Int) {
         val card = list[position]
-
-        Log.i("MEMORY_GAME", "$list")
-
         holder.bind(card, position)
     }
 
     override fun getItemCount(): Int {
         return list.size
     }
+
 }
