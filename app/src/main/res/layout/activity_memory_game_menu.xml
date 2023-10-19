@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="@string/select_difficulty"
+        android:text="@string/select_gamemode"
         android:textColor="@color/subtitleColor"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -62,35 +62,35 @@
         app:layout_constraintTop_toTopOf="@+id/guideline14" />
 
     <Button
-        android:id="@+id/mg_btn_easy_difficult"
-        android:layout_width="200dp"
+        android:id="@+id/mg_btn_singleplayer"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="@string/mg_easy"
-        app:layout_constraintBottom_toTopOf="@+id/mg_btn_medium_difficult"
+        android:text="@string/mg_singleplayer"
+        app:layout_constraintBottom_toTopOf="@+id/mg_btn_2players"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline13" />
 
     <Button
-        android:id="@+id/mg_btn_medium_difficult"
-        android:layout_width="200dp"
+        android:id="@+id/mg_btn_2players"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="@string/mg_medium"
-        app:layout_constraintBottom_toTopOf="@+id/mg_btn_hard_difficult"
+        android:text="@string/mg_2player"
+        app:layout_constraintBottom_toTopOf="@+id/mg_btn_countdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mg_btn_easy_difficult" />
+        app:layout_constraintTop_toBottomOf="@+id/mg_btn_singleplayer" />
 
     <Button
-        android:id="@+id/mg_btn_hard_difficult"
-        android:layout_width="200dp"
+        android:id="@+id/mg_btn_countdown"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="@string/mg_hard"
+        android:text="@string/mg_countdown"
         app:layout_constraintBottom_toTopOf="@+id/guideline14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mg_btn_medium_difficult" />
+        app:layout_constraintTop_toBottomOf="@+id/mg_btn_2players" />
 </androidx.constraintlayout.widget.ConstraintLayout>

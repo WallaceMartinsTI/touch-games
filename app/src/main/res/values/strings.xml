@@ -37,13 +37,14 @@
 
     <!-- GAME - MEMORY GAME -->
     <string name="mg_game_title">Jogo da Memória</string>
-    <string name="mg_easy">FÁCIL (4 pares)</string>
-    <string name="mg_medium">MÉDIO (8 pares)</string>
-    <string name="mg_hard">DIFÍCIL (12 pares)</string>
+    <string name="mg_singleplayer">Singleplayer (pontos e tempo)</string>
+    <string name="mg_2player">2 Jogadores (P1 e P2)</string>
+    <string name="mg_countdown">Contagem Regressiva \n(pontos = +tempo)</string>
 
     <!-- GENERAL -->
     <string name="back_main_screen">Voltar a tela inicial</string>
     <string name="select_difficulty">Selecione a dificuldade</string>
+    <string name="select_gamemode">Selecione o modo de jogo</string>
     <string name="new_game">Novo Jogo</string>
     <string name="back_previous_screen">Voltar a tela anterior</string>
 
