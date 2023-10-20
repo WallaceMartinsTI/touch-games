@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.15" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline16"
@@ -41,20 +41,19 @@
         android:text="@string/new_game"
         app:layout_constraintBottom_toTopOf="@+id/mg_btn_previous_screen"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline17"
         app:layout_constraintTop_toTopOf="@+id/guideline16" />
 
     <Button
         android:id="@+id/mg_btn_previous_screen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="@string/back_previous_screen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mg_btn_new_game" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mg_rv_container"
@@ -72,5 +71,47 @@
         tools:itemCount="6"
         tools:layoutManager="GridLayoutManager"
         tools:listitem="@layout/mg_cards"
-        tools:spanCount="5" />
+        tools:spanCount="5"
+        android:contentDescription="List with cards" />
+
+    <TextView
+        android:id="@+id/mg_textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pontos: 1250"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline15"
+        app:layout_constraintEnd_toStartOf="@+id/guideline17"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/mg_textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tempo: 03:45"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline17"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <Button
+        android:id="@+id/mg_btn_endgame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/endgame"
+        app:layout_constraintBottom_toTopOf="@+id/mg_btn_previous_screen"
+        app:layout_constraintEnd_toStartOf="@+id/guideline17"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline16" />
 </androidx.constraintlayout.widget.ConstraintLayout>

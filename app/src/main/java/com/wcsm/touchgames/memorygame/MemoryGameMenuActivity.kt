@@ -11,9 +11,9 @@ class MemoryGameMenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_memory_game_menu)
 
-        val btnEasyDifficult: Button = findViewById(R.id.mg_btn_singleplayer)
-        val btnMediumDifficult: Button = findViewById(R.id.mg_btn_2players)
-        val btnHardDifficult: Button = findViewById(R.id.mg_btn_countdown)
+        val btnSingleplayer: Button = findViewById(R.id.mg_btn_singleplayer)
+        val btnTwoPlayers: Button = findViewById(R.id.mg_btn_2players)
+        val btnCountdown: Button = findViewById(R.id.mg_btn_countdown)
 
         val btnBackToMainMenu: Button = findViewById(R.id.mg_btn_back_main_screen)
 
@@ -23,8 +23,19 @@ class MemoryGameMenuActivity : AppCompatActivity() {
             finish()
         }
 
-        btnEasyDifficult.setOnClickListener {
-            startActivity(intent)
+        btnSingleplayer.setOnClickListener {
+            startGame(intent, MemoryGameGameTypes.SINGLEPLAYER)
         }
+        btnTwoPlayers.setOnClickListener {
+            startGame(intent, MemoryGameGameTypes.TWOPLAYERS)
+        }
+        btnCountdown.setOnClickListener {
+            startGame(intent, MemoryGameGameTypes.COUNTDOWN)
+        }
+    }
+
+    private fun startGame(intent: Intent, gameType: MemoryGameGameTypes) {
+        intent.putExtra("gameType", gameType)
+        startActivity(intent)
     }
 }

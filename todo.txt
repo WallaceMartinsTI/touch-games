@@ -1,2 +1,4 @@
-diminuir o tamanho da imagem para
-caber 12 imagens na tela
+Deixar o texto da textView vazio
+fazer sistema de remoção de pontos
+
+refatorar em função sistema de pontuação

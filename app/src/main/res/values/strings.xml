@@ -46,6 +46,7 @@
     <string name="select_difficulty">Selecione a dificuldade</string>
     <string name="select_gamemode">Selecione o modo de jogo</string>
     <string name="new_game">Novo Jogo</string>
+    <string name="endgame">Finalizar Jogo</string>
     <string name="back_previous_screen">Voltar a tela anterior</string>
 
 </resources>
