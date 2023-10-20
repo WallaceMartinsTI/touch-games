@@ -1,6 +1,6 @@
 package com.wcsm.touchgames.memorygame
 
-import android.content.Context
+
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
@@ -23,6 +23,8 @@ class CardsAdapter(
     private val handler = Handler()
 
     private var selectedCard = initialCard;
+    private var selectedCardImageView: ImageView? = null
+
     private var previousItemView: View? = null
 
     inner class CardsViewHolder(private val itemView: View, val parentView: ViewGroup) : ViewHolder(itemView) {
@@ -37,11 +39,12 @@ class CardsAdapter(
             //Log.i("MEMORY_GAME", "listReceived: $initialList")
 
             itemView.setOnClickListener {
-                // notifyDataSetChanged()
-                Log.i("MEMORY_GAME", "$itemView")
-                Log.i("MEMORY_GAME", "$card")
-                Log.i("MEMORY_GAME", "$pos")
+                Log.i("MEMORY_GAME", "====================================================================")
                 cardDefault.setImageResource(card.imageSrc)
+
+                Log.i("MEMORY_GAME", "card: $card")
+                Log.i("MEMORY_GAME", "selectedCard: $selectedCard")
+                Log.i("MEMORY_GAME", "plays: $plays")
 
                 if(card == selectedCard) {
                     Log.i("MEMORY_GAME", "${card.imageSrc} JÁ ESTÁ NO ARRAY")
@@ -57,22 +60,45 @@ class CardsAdapter(
                         itemView.isEnabled = false
 
                         previousItemView = null
-
                         cardsMatched = true
+
                         Log.i("MEMORY_GAME", "COMBINOU AS CARTAS")
-                        Toast.makeText(itemView.context, "Cartas Combinadas", Toast.LENGTH_LONG).show()
+
+                        selectedCard = initialCard
+                        plays = 0
+
                     }, 1000)
+
                 } else {
-                    previousItemView = itemView
-                    selectedCard = card
                     Log.i("MEMORY_GAME", "${card.imageSrc} NÃO ESTAVA NO ARRAY E FOI ADICIONADO")
 
-                    if(previousItemView != null && plays == 1) {
+                    previousItemView = itemView
+                    selectedCard = card
+
+                    if(plays == 0) {
+                        selectedCardImageView = cardDefault
+                    }
+
+                    if(plays == 1 && !cardsMatched) {
                         Log.i("MEMORY_GAME", "JOGOU 2X E NAO COMBINOU")
                         plays = 0
+
+                        handler.postDelayed({
+
+                            cardDefault.setImageResource(R.drawable.mg_square_24)
+                            selectedCardImageView?.setImageResource(R.drawable.mg_square_24)
+
+                            previousItemView = null
+
+                        }, 1000)
+
+                        selectedCard = initialCard
+                        //cardsMatched = false
+                    } else {
+                        plays++
                     }
+                    cardsMatched = false
                 }
-                plays++
             }
         }
     }
