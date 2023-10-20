@@ -33,7 +33,8 @@ class CardsAdapter(
 
         fun bind(card: Card, pos: Int) {
 
-            cardDefault.setImageResource(R.drawable.mg_square_24) // código para mostrar os quadrados (carta pra baixo)
+            //cardDefault.setImageResource(R.drawable.mg_square_24) // código para mostrar os quadrados (carta pra baixo)
+            cardDefault.setImageResource(R.drawable.mg_card_back) // código para mostrar os quadrados (carta pra baixo)
 
             //cardDefault.setImageResource(card.imageSrc) // código para mostrar os cards
             //Log.i("MEMORY_GAME", "listReceived: $initialList")
@@ -85,15 +86,16 @@ class CardsAdapter(
 
                         handler.postDelayed({
 
-                            cardDefault.setImageResource(R.drawable.mg_square_24)
-                            selectedCardImageView?.setImageResource(R.drawable.mg_square_24)
+                            //cardDefault.setImageResource(R.drawable.mg_square_24)
+                            cardDefault.setImageResource(R.drawable.mg_card_back)
+                            //selectedCardImageView?.setImageResource(R.drawable.mg_square_24)
+                            selectedCardImageView?.setImageResource(R.drawable.mg_card_back)
 
                             previousItemView = null
 
                         }, 1000)
 
                         selectedCard = initialCard
-                        //cardsMatched = false
                     } else {
                         plays++
                     }
