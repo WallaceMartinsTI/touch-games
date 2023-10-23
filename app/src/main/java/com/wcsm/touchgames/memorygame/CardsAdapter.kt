@@ -36,7 +36,7 @@ class CardsAdapter(
         PLUS, MINUS
     }
 
-    inner class CardsViewHolder(private val itemView: View, val parentView: ViewGroup) : ViewHolder(itemView) {
+    inner class CardsViewHolder(private val itemView: View) : ViewHolder(itemView) {
 
         private val cardDefault: ImageView = itemView.findViewById(R.id.mg_card_default)
 
@@ -85,11 +85,18 @@ class CardsAdapter(
                 } else {
                     Log.i("MEMORY_GAME", "${card.imageSrc} NÃO ESTAVA NO ARRAY E FOI ADICIONADO")
 
-                    previousItemView = itemView
+                    //previousItemView = itemView
+
+                    //previousItemView!!.isEnabled = false
+
                     selectedCard = card
 
                     if(plays == 0) {
                         selectedCardImageView = cardDefault
+                        previousItemView = itemView
+                        previousItemView!!.isEnabled = false
+                    } else {
+                        previousItemView!!.isEnabled = true
                     }
 
                     if(plays == 1 && !cardsMatched) {
@@ -124,7 +131,7 @@ class CardsAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val itemView = layoutInflater.inflate(R.layout.mg_cards, parent, false)
-        return CardsViewHolder(itemView, parent)
+        return CardsViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: CardsViewHolder, position: Int) {
