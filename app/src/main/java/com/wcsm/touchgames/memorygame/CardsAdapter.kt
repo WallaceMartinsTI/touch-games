@@ -1,5 +1,6 @@
 package com.wcsm.touchgames.memorygame
 
+
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.wcsm.touchgames.R
@@ -18,7 +18,6 @@ class CardsAdapter(
     private var textView1: TextView,
     private var textView2: TextView
 ) : Adapter<CardsAdapter.CardsViewHolder>() {
-
     private val initialCard = Card(0)
     private var plays = 0
     private var cardsMatched = false
@@ -31,6 +30,15 @@ class CardsAdapter(
     private var previousItemView: View? = null
 
     private var singleplayerPoints = 0
+    private var countUpTimer: CountUpTimer? = null
+
+    init {
+        countUpTimer = object : CountUpTimer(1000) {
+            override fun onTick(elapsedTime: Long) {
+                updateTimerUI(elapsedTime)
+            }
+        }
+    }
 
     enum class Operations {
         PLUS, MINUS
@@ -80,14 +88,11 @@ class CardsAdapter(
                         if(gameType == MemoryGameGameTypes.SINGLEPLAYER) {
                             textView1.text = "Pontos: $singleplayerPoints"
                         }
+                        itemView.isEnabled = true
                     }, 1000)
 
                 } else {
                     Log.i("MEMORY_GAME", "${card.imageSrc} NÃO ESTAVA NO ARRAY E FOI ADICIONADO")
-
-                    //previousItemView = itemView
-
-                    //previousItemView!!.isEnabled = false
 
                     selectedCard = card
 
@@ -116,6 +121,8 @@ class CardsAdapter(
                                 textView1.text = "Pontos: ${singleplayerPoints}"
                                 Log.i("MEMORY_GAME", "APÓS textView1.text: ${textView1.text}")
                             }
+
+                            itemView.isEnabled = true
                         }, 1000)
 
                         selectedCard = initialCard
@@ -124,6 +131,7 @@ class CardsAdapter(
                     }
                     cardsMatched = false
                 }
+                itemView.isEnabled = false
             }
         }
     }
@@ -137,13 +145,14 @@ class CardsAdapter(
     override fun onBindViewHolder(holder: CardsViewHolder, position: Int) {
         val card = list[position]
         holder.bind(card)
+        startCountUpTimer()
     }
 
     override fun getItemCount(): Int {
         return list.size
     }
 
-    fun checkPontuation(operation: Operations, actualPoints: Int) : Int {
+    private fun checkPontuation(operation: Operations, actualPoints: Int) : Int {
         val pointsToWin = 50
         val pointsToLose = 5
         var result = actualPoints
@@ -158,4 +167,13 @@ class CardsAdapter(
         return result
     }
 
+    private fun startCountUpTimer() {
+        countUpTimer?.start()
+    }
+
+    private fun updateTimerUI(elapsedTime: Long) {
+        val minutes = (elapsedTime / 1000) / 60
+        val seconds = (elapsedTime / 1000) % 60
+        textView2.text = String.format("%02d:%02d", minutes, seconds)
+    }
 }

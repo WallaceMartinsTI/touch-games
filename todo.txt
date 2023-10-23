@@ -4,4 +4,6 @@ Fazer sistema de remoção de pontos (OK)
 
 Refatorar em função sistema de pontuação (OK)
 
-Arrumar bug de clicar 2 vezes no mesmo card e validar o ponto
+Arrumar bug de clicar 2 vezes no mesmo card e validar o ponto (OK)
+
+Implementar os outros modos de jogo
