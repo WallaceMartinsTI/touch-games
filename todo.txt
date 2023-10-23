@@ -1,4 +1,7 @@
 Deixar o texto da textView vazio
-fazer sistema de remoção de pontos
 
-refatorar em função sistema de pontuação
+Fazer sistema de remoção de pontos (OK)
+
+Refatorar em função sistema de pontuação (OK)
+
+Arrumar bug de clicar 2 vezes no mesmo card e validar o ponto

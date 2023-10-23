@@ -1,6 +1,5 @@
 package com.wcsm.touchgames.memorygame
 
-
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,8 +11,6 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.wcsm.touchgames.R
-
-
 
 class CardsAdapter(
     private val list: MutableList<Card>,
@@ -43,28 +40,19 @@ class CardsAdapter(
 
         private val cardDefault: ImageView = itemView.findViewById(R.id.mg_card_default)
 
-        //private var textView1: TextView = parentView.findViewById(R.id.mg_textView1)
-
-        //var textView2: TextView = itemView.findViewById(R.id.mg_textView2)
-
         fun bind(card: Card) {
-            //Log.i("MEMORY_GAME", "textView1: $textView1")
 
             cardDefault.setImageResource(R.drawable.mg_card_back) // código para mostrar os quadrados (carta pra baixo)
-
             //cardDefault.setImageResource(card.imageSrc) // código para mostrar os cards
-            //Log.i("MEMORY_GAME", "listReceived: $initialList")
-
-
 
             itemView.setOnClickListener {
                 // Cards Manipulation
                 Log.i("MEMORY_GAME", "====================================================================")
                 cardDefault.setImageResource(card.imageSrc)
 
-                Log.i("MEMORY_GAME", "card: $card")
-                Log.i("MEMORY_GAME", "selectedCard: $selectedCard")
-                Log.i("MEMORY_GAME", "plays: $plays")
+                //Log.i("MEMORY_GAME", "card: $card")
+                //Log.i("MEMORY_GAME", "selectedCard: $selectedCard")
+                //Log.i("MEMORY_GAME", "plays: $plays")
 
                 if(card == selectedCard) {
                     Log.i("MEMORY_GAME", "${card.imageSrc} JÁ ESTÁ NO ARRAY")
@@ -83,24 +71,15 @@ class CardsAdapter(
                         cardsMatched = true
 
                         Log.i("MEMORY_GAME", "COMBINOU AS CARTAS")
-
-                        //singleplayerPoints += 50
                         singleplayerPoints = checkPontuation(Operations.PLUS, singleplayerPoints)
-                        Log.i("MEMORY_GAME", "SOMOU PONTOS: $singleplayerPoints")
 
                         selectedCard = initialCard
                         plays = 0
 
                         // Pontuation and Time Manipulation
                         if(gameType == MemoryGameGameTypes.SINGLEPLAYER) {
-                            Log.i("MEMORY_GAME", "Entrou no IF gameType = SINGLEPLAYER")
-                            Log.i("MEMORY_GAME", "gameType: $gameType")
-                            Log.i("MEMORY_GAME", "textView1: $textView1")
-                            Log.i("MEMORY_GAME", "textView1.text: ${textView1.text}")
                             textView1.text = "Pontos: $singleplayerPoints"
-                            Log.i("MEMORY_GAME", "APÓS textView1.text: ${textView1.text}")
                         }
-
                     }, 1000)
 
                 } else {
@@ -123,25 +102,13 @@ class CardsAdapter(
 
                             previousItemView = null
 
-                            /*singleplayerPoints = if (singleplayerPoints != 0) {
-                                singleplayerPoints - 50
-                            } else {
-                                0
-                            }*/
-
                             singleplayerPoints = checkPontuation(Operations.MINUS, singleplayerPoints)
-                            // fazer perda de pontos
-                            // Pontuation and Time Manipulation
+
+                            // Losing Points if cards don't combine
                             if(gameType == MemoryGameGameTypes.SINGLEPLAYER) {
-                                Log.i("MEMORY_GAME", "Entrou no IF gameType = SINGLEPLAYER")
-                                Log.i("MEMORY_GAME", "gameType: $gameType")
-                                Log.i("MEMORY_GAME", "textView1: $textView1")
-                                Log.i("MEMORY_GAME", "textView1.text: ${textView1.text}")
-                                //textView1.text = "Pontos: $singleplayerPoints"
                                 textView1.text = "Pontos: ${singleplayerPoints}"
                                 Log.i("MEMORY_GAME", "APÓS textView1.text: ${textView1.text}")
                             }
-
                         }, 1000)
 
                         selectedCard = initialCard
@@ -170,14 +137,15 @@ class CardsAdapter(
     }
 
     fun checkPontuation(operation: Operations, actualPoints: Int) : Int {
-        val points = 50
+        val pointsToWin = 50
+        val pointsToLose = 5
         var result = actualPoints
 
         if(operation == Operations.PLUS) {
-            result = actualPoints + points
+            result = actualPoints + pointsToWin
         } else if(operation == Operations.MINUS) {
             if(result != 0) {
-                result  = actualPoints - points
+                result  = actualPoints - pointsToLose
             }
         }
         return result
