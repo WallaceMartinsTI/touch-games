@@ -43,9 +43,13 @@ class MemoryGameGameActivity : AppCompatActivity() {
                 }
                 MemoryGameGameTypes.TWOPLAYERS -> {
                     gameType = MemoryGameGameTypes.TWOPLAYERS
+                    textView1.text = "1º Jogador: 0"
+                    textView2.text = "2º Jogador: 0"
                 }
                 MemoryGameGameTypes.COUNTDOWN -> {
                     gameType = MemoryGameGameTypes.COUNTDOWN
+                    textView1.text = "Pontos: 0"
+                    textView2.text = "Tempo: 00:00"
                 }
             }
         }

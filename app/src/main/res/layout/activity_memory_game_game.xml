@@ -35,16 +35,6 @@
         app:layout_constraintGuide_percent="0.8" />
 
     <Button
-        android:id="@+id/mg_btn_new_game"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/new_game"
-        app:layout_constraintBottom_toTopOf="@+id/mg_btn_previous_screen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline17"
-        app:layout_constraintTop_toTopOf="@+id/guideline16" />
-
-    <Button
         android:id="@+id/mg_btn_previous_screen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,7 +71,6 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline15"
-        app:layout_constraintEnd_toStartOf="@+id/guideline17"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -93,15 +82,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline15"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline17"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
 
     <Button
         android:id="@+id/mg_btn_endgame"
@@ -109,7 +90,7 @@
         android:layout_height="wrap_content"
         android:text="@string/endgame"
         app:layout_constraintBottom_toTopOf="@+id/mg_btn_previous_screen"
-        app:layout_constraintEnd_toStartOf="@+id/guideline17"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline16" />
 </androidx.constraintlayout.widget.ConstraintLayout>
