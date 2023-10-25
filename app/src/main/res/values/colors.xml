@@ -8,4 +8,7 @@
     <color name="subtitleColor">#1919AA</color>
 
     <color name="btn_back_main_screen">#18263A</color>
+
+    <!-- GAME - MEMORY GAME -->
+    <color name="mg_player_turn">#FFD700</color>
 </resources>
