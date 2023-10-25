@@ -33,9 +33,9 @@ class MemoryGameGameActivity : AppCompatActivity() {
         val bundle = intent.extras
 
         if(bundle != null) {
-            val gameTypeReceived = bundle.getSerializable("gameType") as MemoryGameGameTypes
+            //val gameTypeReceived = bundle.getSerializable("gameType") as MemoryGameGameTypes
 
-            when (gameTypeReceived) {
+            when (bundle.getSerializable("gameType") as MemoryGameGameTypes) {
                 MemoryGameGameTypes.SINGLEPLAYER -> {
                     gameType =  MemoryGameGameTypes.SINGLEPLAYER
                     textView1.text = "Pontos: 0"
@@ -49,7 +49,6 @@ class MemoryGameGameActivity : AppCompatActivity() {
                 }
             }
         }
-
 
         // 10 Different Cards = 20 Pairs
         val cards = listOf(

@@ -60,7 +60,6 @@ class JokenpoActivity : AppCompatActivity() {
     private fun generateAppChoice(): JKPMoves {
         val options = listOf(JKPMoves.STONE, JKPMoves.PAPER, JKPMoves.SCISSORS)
         val randomNumber = Random.nextInt(3)
-
         val appChoice = options[randomNumber]
 
         when (appChoice) {

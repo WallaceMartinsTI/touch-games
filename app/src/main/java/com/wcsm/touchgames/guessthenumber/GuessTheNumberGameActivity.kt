@@ -19,7 +19,6 @@ class GuessTheNumberGameActivity : AppCompatActivity() {
         val bundle = intent.extras
         val difficulty = bundle?.getString("difficulty")
 
-
         val guessInputText: TextInputEditText = findViewById(R.id.gtn_guess_input_text)
         val guessTextInputLayout: TextInputLayout = findViewById(R.id.gtn_text_input_layout)
 
@@ -27,14 +26,10 @@ class GuessTheNumberGameActivity : AppCompatActivity() {
         val btnNewGame: Button = findViewById(R.id.gtn_btn_new_game)
         val btnPreviousScreen: Button = findViewById(R.id.gtn_btn_previous_screen)
 
-
         val attemptsQuantityField: TextView = findViewById(R.id.attempts_quantity)
-
         val winTextField: TextView = findViewById(R.id.gtn_win_text)
 
-
         var randomNumber = generateRandomNumber(difficulty)
-
         var attempts = 0
 
         // Clear all states for the New Game
@@ -76,7 +71,6 @@ class GuessTheNumberGameActivity : AppCompatActivity() {
         }
 
         setDifficultyChoosen(difficulty)
-
     }
     private fun generateRandomNumber(difficulty: String?): Int {
         val max = when (difficulty) {
