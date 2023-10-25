@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wcsm.touchgames.R
@@ -50,7 +51,7 @@ class MemoryGameGameActivity : AppCompatActivity() {
         }
 
 
-
+        // 10 Different Cards = 20 Pairs
         val cards = listOf(
             Card(R.drawable.mg_audiotrack_24),
             Card(R.drawable.mg_audiotrack_24),
@@ -68,14 +69,26 @@ class MemoryGameGameActivity : AppCompatActivity() {
             Card(R.drawable.mg_vpn_key_24),
 
             Card(R.drawable.mg_work_24),
-            Card(R.drawable.mg_work_24)
+            Card(R.drawable.mg_work_24),
+
+            Card(R.drawable.mg_sports_martial_arts_24),
+            Card(R.drawable.mg_sports_martial_arts_24),
+
+            Card(R.drawable.mg_sports_esports_24),
+            Card(R.drawable.mg_sports_esports_24),
+
+            Card(R.drawable.mg_spoke_24),
+            Card(R.drawable.mg_spoke_24),
+
+            Card(R.drawable.mg_wb_sunny_24),
+            Card(R.drawable.mg_wb_sunny_24)
         )
 
         // Método Original
         //val shuffledCards = cards.shuffled().toMutableList()
         //rvContainer.adapter = CardsAdapter(shuffledCards)
 
-        // Testes
+        // Tests
         val treatedCards = cards.toMutableList()
         rvContainer.adapter = CardsAdapter(treatedCards, gameType, textView1, textView2)
 

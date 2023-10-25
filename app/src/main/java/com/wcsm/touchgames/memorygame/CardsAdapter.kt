@@ -145,7 +145,10 @@ class CardsAdapter(
     override fun onBindViewHolder(holder: CardsViewHolder, position: Int) {
         val card = list[position]
         holder.bind(card)
-        startCountUpTimer()
+        
+        if(gameType == MemoryGameGameTypes.SINGLEPLAYER) {
+            startCountUpTimer()
+        }
     }
 
     override fun getItemCount(): Int {

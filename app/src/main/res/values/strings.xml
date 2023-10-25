@@ -40,6 +40,7 @@
     <string name="mg_singleplayer">Singleplayer (pontos e tempo)</string>
     <string name="mg_2player">2 Jogadores (P1 e P2)</string>
     <string name="mg_countdown">Contagem Regressiva \n(pontos = +tempo)</string>
+    <string name="mg_rv_content_description">Lista com as cartas</string>
 
     <!-- GENERAL -->
     <string name="back_main_screen">Voltar a tela inicial</string>
