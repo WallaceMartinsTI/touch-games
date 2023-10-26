@@ -1,12 +1,15 @@
 package com.wcsm.touchgames.memorygame
 
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.CountDownTimer
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -19,10 +22,12 @@ enum class PlayerTurn{
 }
 
 class CardsAdapter(
+    private val context: Context,
     private val list: MutableList<Card>,
     private val gameType: MemoryGameGameTypes?,
     private var textView1: TextView,
-    private var textView2: TextView
+    private var textView2: TextView,
+    private val endgameButton: Button
 ) : Adapter<CardsAdapter.CardsViewHolder>() {
     private val initialCard = Card(0)
     private var plays = 0
@@ -38,21 +43,29 @@ class CardsAdapter(
     // Singleplayer Variables
     private var singleplayerPoints = 0
     private var countUpTimer: CountUpTimer? = null
+    private var singleplayerCombinations = 0
+    private var timeElapsed: Long = 0
 
     // Two Players Variables
     private var firstPlayerPoints = 0
     private var secondPlayerPoints = 0
     private var turn = PlayerTurn.PLAYER1
+    private var firstPlayerCombinations = 0
+    private var secondPlayerCombinations = 0
 
     // Countdown Variables
     private var countdownPoints = 0
     private var countDownTimer: CountDownTimer? = null
+    private var countdownCombinations = 0
     private var timeLeftInMillis: Long = 60000
+    //private var timeLeftInMillis: Long = 7000 -> low time for tests
     private var timeGainedInMillis: Long = 15000
+    private var timeLeft: Long = 0
 
     init {
         countUpTimer = object : CountUpTimer(1000) {
             override fun onTick(elapsedTime: Long) {
+                timeElapsed = elapsedTime
                 updateTimerUI(elapsedTime)
             }
         }
@@ -71,8 +84,8 @@ class CardsAdapter(
         PLUS, MINUS
     }
 
-    inner class CardsViewHolder(private val itemView: View) : ViewHolder(itemView) {
 
+    inner class CardsViewHolder(private val itemView: View) : ViewHolder(itemView) {
         private val cardDefault: ImageView = itemView.findViewById(R.id.mg_card_default)
 
         private var playerTurnColor = ContextCompat.getColor(itemView.context, R.color.mg_player_turn)
@@ -90,10 +103,6 @@ class CardsAdapter(
                 // Cards Manipulation
                 Log.i("MEMORY_GAME", "====================================================================")
                 cardDefault.setImageResource(card.imageSrc)
-
-                //Log.i("MEMORY_GAME", "card: $card")
-                //Log.i("MEMORY_GAME", "selectedCard: $selectedCard")
-                //Log.i("MEMORY_GAME", "plays: $plays")
 
                 if(card == selectedCard) {
                     Log.i("MEMORY_GAME", "${card.imageSrc} JÁ ESTÁ NO ARRAY")
@@ -120,21 +129,23 @@ class CardsAdapter(
                         if(gameType == MemoryGameGameTypes.SINGLEPLAYER) {
                             singleplayerPoints = checkPontuation(Operations.PLUS, singleplayerPoints)
                             textView1.text = "Pontos: $singleplayerPoints"
+                            singleplayerCombinations++
                         } else if(gameType == MemoryGameGameTypes.TWOPLAYERS) {
                             if(turn == PlayerTurn.PLAYER1) {
                                 firstPlayerPoints = checkPontuation(Operations.PLUS, firstPlayerPoints)
                                 textView1.text = "1º Jogador: $firstPlayerPoints"
+                                firstPlayerCombinations++
                             } else if(turn == PlayerTurn.PLAYER2) {
                                 secondPlayerPoints = checkPontuation(Operations.PLUS, secondPlayerPoints)
                                 textView2.text = "2º Jogador: $secondPlayerPoints"
+                                secondPlayerCombinations++
                             }
                         } else if(gameType == MemoryGameGameTypes.COUNTDOWN) {
                             countDownTimer?.cancel()
                             timeLeftInMillis += timeGainedInMillis
                             startCountdownCounter()
-                            Log.i("MEMORY_GAME", "Tempo ganho: $timeGainedInMillis, Tempo restante: $timeLeftInMillis")
                             updateCountdownUI()
-
+                            countdownCombinations++
                             countdownPoints = checkPontuation(Operations.PLUS, countdownPoints)
                             textView1.text = "Pontos: $countdownPoints"
                         }
@@ -182,6 +193,8 @@ class CardsAdapter(
                                 }
                             } else if(gameType == MemoryGameGameTypes.COUNTDOWN) {
                                 // SE ERRAR ACONTECE AQUI:
+                                countdownPoints = checkPontuation(Operations.MINUS, countdownPoints)
+                                textView1.text = "Pontos: ${countdownPoints}"
                             }
 
                             itemView.isEnabled = true
@@ -210,6 +223,10 @@ class CardsAdapter(
         
         if(gameType == MemoryGameGameTypes.SINGLEPLAYER) {
             startCountUpTimer()
+        }
+
+        endgameButton.setOnClickListener {
+            showEndgameDialog()
         }
     }
 
@@ -242,7 +259,6 @@ class CardsAdapter(
         }
     }
 
-    // Two Players Functions
     private fun startCountUpTimer() {
         countUpTimer?.start()
     }
@@ -250,19 +266,22 @@ class CardsAdapter(
     private fun updateTimerUI(elapsedTime: Long) {
         val minutes = (elapsedTime / 1000) / 60
         val seconds = (elapsedTime / 1000) % 60
-        textView2.text = String.format("%02d:%02d", minutes, seconds)
+        val formattedTime = String.format("%02d:%02d", minutes, seconds)
+        textView2.text = "Tempo: $formattedTime"
     }
 
-    // Countdown Functions
     private fun startCountdownCounter() {
         countDownTimer = object : CountDownTimer(timeLeftInMillis, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 timeLeftInMillis = millisUntilFinished
+                timeLeft = timeLeftInMillis
                 updateCountdownUI()
             }
 
             override fun onFinish() {
-                // QUANDO ZERAR O CONTADOR
+                // When counter finish
+                val message = "ESTATÍSTICAS\nCombinações: ${countdownCombinations}\nPontos feitos: $countdownPoints"
+                endgameDialog(context, "Seu tempo ACABOU!", message)
             }
         }.start()
     }
@@ -270,9 +289,52 @@ class CardsAdapter(
     private fun updateCountdownUI() {
         val minutes = (timeLeftInMillis / 1000) / 60
         val seconds = (timeLeftInMillis / 1000) % 60
-        textView2.text = String.format("%02d:%02d", minutes, seconds)
+        val formattedTime = String.format("%02d:%02d", minutes, seconds)
+        textView2.text = "Tempo: $formattedTime"
     }
 
+    private fun endgameDialog(context: Context, title: String, message: String) {
+        AlertDialog.Builder(context)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("Novo Jogo") { dialog, _ ->
+                // Código a ser executado quando o botão "Confirmar" for clicado
+                Log.i("MEMORY_GAME", "CONFIRMOU DIALOG")
+                dialog.dismiss()
+            }
+            .setNegativeButton("Menu Inicial") { dialog, _ ->
+                // Código a ser executado quando o botão "Cancelar" for clicado
+                Log.i("MEMORY_GAME", "CANCELOU DIALOG")
+                dialog.dismiss()
+            }
+            .show()
+    }
 
-
+    private fun showEndgameDialog() {
+        var message = ""
+        when(gameType) {
+            MemoryGameGameTypes.SINGLEPLAYER -> {
+                countUpTimer?.stop()
+                val minutes = (timeElapsed / 1000) / 60
+                val seconds = (timeElapsed / 1000) % 60
+                val finalTimeElapsed = String.format("%02d:%02d", minutes, seconds)
+                message = "ESTATÍSTICAS\nCombinações: ${singleplayerCombinations}\nPontos feitos: $singleplayerPoints\nDuração: $finalTimeElapsed"
+            }
+            MemoryGameGameTypes.TWOPLAYERS -> {
+                message = "ESTATÍSTICAS\n=> Jogador 1 <=\nCombinações: ${firstPlayerCombinations}\nPontos: $firstPlayerPoints\n\n" +
+                        "=> Jogador 2 <=\nCombinações: $secondPlayerCombinations\nPontos: $secondPlayerPoints"
+            }
+            MemoryGameGameTypes.COUNTDOWN -> {
+                countDownTimer?.cancel()
+                val minutes = (timeLeft / 1000) / 60
+                val seconds = (timeLeft / 1000) % 60
+                val finalTimeLeft = String.format("%02d:%02d", minutes, seconds)
+                message = "ESTATÍSTICAS\nCombinações: ${countdownCombinations}\nPontos feitos: $countdownPoints\nTempo restante: $finalTimeLeft"
+            }
+            else -> {
+                message = "HOUVE ALGUM ERRO"
+            }
+        }
+        endgameDialog(context, "Fim de Jogo!", message)
+    }
 }

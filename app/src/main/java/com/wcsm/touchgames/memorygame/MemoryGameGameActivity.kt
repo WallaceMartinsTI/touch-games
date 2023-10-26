@@ -18,13 +18,13 @@ class MemoryGameGameActivity : AppCompatActivity() {
         setContentView(R.layout.activity_memory_game_game)
 
         val rvContainer: RecyclerView = findViewById(R.id.mg_rv_container)
-        val btnNewGame: Button = findViewById(R.id.mg_btn_new_game)
         val btnPreviousScreen: Button = findViewById(R.id.mg_btn_previous_screen)
 
         btnPreviousScreen.setOnClickListener {
             finish()
         }
 
+        val endgameButton: Button = findViewById(R.id.mg_btn_endgame)
         val textView1: TextView = findViewById(R.id.mg_textView1)
         val textView2: TextView = findViewById(R.id.mg_textView2)
 
@@ -93,7 +93,7 @@ class MemoryGameGameActivity : AppCompatActivity() {
 
         // Tests
         val treatedCards = cards.toMutableList()
-        rvContainer.adapter = CardsAdapter(treatedCards, gameType, textView1, textView2)
+        rvContainer.adapter = CardsAdapter(this, treatedCards, gameType, textView1, textView2, endgameButton)
 
         rvContainer.layoutManager = GridLayoutManager(this, 4)
 
