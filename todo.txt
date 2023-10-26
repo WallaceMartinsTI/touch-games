@@ -10,7 +10,7 @@ Implementar os outros modos de jogo (OK)
 
 Dialog de endgame de todos os modos ao clicar no botao Finalizar Jogo (OK)
 
-Implementar botoes do Dialog de voltar a tela inicial e reiniciar jogo ( )
+Implementar botoes do Dialog de voltar a tela inicial e reiniciar jogo (OK)
 
 Reiniciar cartas viradas pra baixo quando acabar as cartas do jogo ( )
 

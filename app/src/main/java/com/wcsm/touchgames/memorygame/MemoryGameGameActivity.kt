@@ -33,8 +33,6 @@ class MemoryGameGameActivity : AppCompatActivity() {
         val bundle = intent.extras
 
         if(bundle != null) {
-            //val gameTypeReceived = bundle.getSerializable("gameType") as MemoryGameGameTypes
-
             when (bundle.getSerializable("gameType") as MemoryGameGameTypes) {
                 MemoryGameGameTypes.SINGLEPLAYER -> {
                     gameType =  MemoryGameGameTypes.SINGLEPLAYER

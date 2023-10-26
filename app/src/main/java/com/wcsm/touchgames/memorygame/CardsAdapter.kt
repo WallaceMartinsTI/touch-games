@@ -3,6 +3,7 @@ package com.wcsm.touchgames.memorygame
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.os.CountDownTimer
 import android.os.Handler
 import android.util.Log
@@ -15,6 +16,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.wcsm.touchgames.MainActivity
 import com.wcsm.touchgames.R
 
 enum class PlayerTurn{
@@ -298,12 +300,18 @@ class CardsAdapter(
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton("Novo Jogo") { dialog, _ ->
-                // Código a ser executado quando o botão "Confirmar" for clicado
+                // Code to be executed when the "Novo Jogo" button is clicked
+                val intent = Intent(context, MemoryGameMenuActivity::class.java)
+                context.startActivity(intent)
+
                 Log.i("MEMORY_GAME", "CONFIRMOU DIALOG")
                 dialog.dismiss()
             }
             .setNegativeButton("Menu Inicial") { dialog, _ ->
-                // Código a ser executado quando o botão "Cancelar" for clicado
+                // Code to be executed when the "Menu Inicial" button is clicked
+                val intent = Intent(context, MainActivity::class.java)
+                context.startActivity(intent)
+
                 Log.i("MEMORY_GAME", "CANCELOU DIALOG")
                 dialog.dismiss()
             }
