@@ -18,4 +18,7 @@ Criar e baixar cards_back com o fundo preto para versao dark theme ( )
 
 BUGS:
 
-Clicar em vários cards além dos 2 necessários está crashando o app
+Clicar em vários cards além dos 2 necessários está crashando o app {
+    RESOLVIDO: adicionei um contador de clicks, o click só ativa se
+    a quantidade de clicks for inferior a 2.
+}

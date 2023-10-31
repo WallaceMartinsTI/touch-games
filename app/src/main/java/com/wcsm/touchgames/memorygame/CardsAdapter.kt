@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.wcsm.touchgames.MainActivity
 import com.wcsm.touchgames.R
 
-enum class PlayerTurn{
+enum class PlayerTurn {
     PLAYER1, PLAYER2
 }
 
@@ -42,6 +42,9 @@ class CardsAdapter(
 
     private var previousItemView: View? = null
 
+    private var clicksCounter = 0
+
+
     // Singleplayer Variables
     private var singleplayerPoints = 0
     private var countUpTimer: CountUpTimer? = null
@@ -60,6 +63,7 @@ class CardsAdapter(
     private var countDownTimer: CountDownTimer? = null
     private var countdownCombinations = 0
     private var timeLeftInMillis: Long = 60000
+
     //private var timeLeftInMillis: Long = 7000 -> low time for tests
     private var timeGainedInMillis: Long = 15000
     private var timeLeft: Long = 0
@@ -72,10 +76,10 @@ class CardsAdapter(
             }
         }
 
-        if(gameType == MemoryGameGameTypes.TWOPLAYERS) {
+        if (gameType == MemoryGameGameTypes.TWOPLAYERS) {
             textView1.text = "1º Jogador: $firstPlayerPoints"
             textView2.text = "2º Jogador: $secondPlayerPoints"
-        } else if(gameType == MemoryGameGameTypes.COUNTDOWN) {
+        } else if (gameType == MemoryGameGameTypes.COUNTDOWN) {
             textView1.text = "Pontos: $countdownPoints"
             textView2.text = "Tempo: 00:00"
             startCountdownCounter()
@@ -90,11 +94,12 @@ class CardsAdapter(
     inner class CardsViewHolder(private val itemView: View) : ViewHolder(itemView) {
         private val cardDefault: ImageView = itemView.findViewById(R.id.mg_card_default)
 
-        private var playerTurnColor = ContextCompat.getColor(itemView.context, R.color.mg_player_turn)
+        private var playerTurnColor =
+            ContextCompat.getColor(itemView.context, R.color.mg_player_turn)
         private var playerDefaultColor = ContextCompat.getColor(itemView.context, R.color.black)
 
         fun bind(card: Card) {
-            if(gameType == MemoryGameGameTypes.TWOPLAYERS) {
+            if (gameType == MemoryGameGameTypes.TWOPLAYERS) {
                 textView1.setTextColor(playerTurnColor)
             }
 
@@ -102,113 +107,133 @@ class CardsAdapter(
             //cardDefault.setImageResource(card.imageSrc) // código para mostrar os cards
 
             itemView.setOnClickListener {
-                // Cards Manipulation
-                Log.i("MEMORY_GAME", "====================================================================")
-                cardDefault.setImageResource(card.imageSrc)
+                clicksCounter++
+                Log.i("MEMORY_GAME", "Clicks: $clicksCounter")
 
-                if(card == selectedCard) {
-                    Log.i("MEMORY_GAME", "${card.imageSrc} JÁ ESTÁ NO ARRAY")
+                if (clicksCounter <= 2) {
+                    // Cards Manipulation
+                    Log.i(
+                        "MEMORY_GAME",
+                        "===================================================================="
+                    )
+                    cardDefault.setImageResource(card.imageSrc)
 
-                    // Wait 1 second before turn cards invisible
-                    handler.postDelayed({
-                        // PreviousItem
-                        previousItemView!!.visibility = View.INVISIBLE
-                        previousItemView!!.isEnabled = false
+                    if (card == selectedCard) {
+                        Log.i("MEMORY_GAME", "${card.imageSrc} JÁ ESTÁ NO ARRAY")
 
-                        // Actual Item
-                        itemView.visibility = View.INVISIBLE
-                        itemView.isEnabled = false
-
-                        previousItemView = null
-                        cardsMatched = true
-
-                        Log.i("MEMORY_GAME", "COMBINOU AS CARTAS")
-
-                        selectedCard = initialCard
-                        plays = 0
-
-                        // Pontuation and Time Manipulation
-                        if(gameType == MemoryGameGameTypes.SINGLEPLAYER) {
-                            singleplayerPoints = checkPontuation(Operations.PLUS, singleplayerPoints)
-                            textView1.text = "Pontos: $singleplayerPoints"
-                            singleplayerCombinations++
-                        } else if(gameType == MemoryGameGameTypes.TWOPLAYERS) {
-                            if(turn == PlayerTurn.PLAYER1) {
-                                firstPlayerPoints = checkPontuation(Operations.PLUS, firstPlayerPoints)
-                                textView1.text = "1º Jogador: $firstPlayerPoints"
-                                firstPlayerCombinations++
-                            } else if(turn == PlayerTurn.PLAYER2) {
-                                secondPlayerPoints = checkPontuation(Operations.PLUS, secondPlayerPoints)
-                                textView2.text = "2º Jogador: $secondPlayerPoints"
-                                secondPlayerCombinations++
-                            }
-                        } else if(gameType == MemoryGameGameTypes.COUNTDOWN) {
-                            countDownTimer?.cancel()
-                            timeLeftInMillis += timeGainedInMillis
-                            startCountdownCounter()
-                            updateCountdownUI()
-                            countdownCombinations++
-                            countdownPoints = checkPontuation(Operations.PLUS, countdownPoints)
-                            textView1.text = "Pontos: $countdownPoints"
-                        }
-                        itemView.isEnabled = true
-                    }, 1000)
-
-                } else {
-                    Log.i("MEMORY_GAME", "${card.imageSrc} NÃO ESTAVA NO ARRAY E FOI ADICIONADO")
-
-                    selectedCard = card
-
-                    if(plays == 0) {
-                        selectedCardImageView = cardDefault
-                        previousItemView = itemView
-                        previousItemView!!.isEnabled = false
-                    } else {
-                        previousItemView!!.isEnabled = true
-                    }
-
-                    if(plays == 1 && !cardsMatched) {
-                        Log.i("MEMORY_GAME", "JOGOU 2X E NAO COMBINOU")
-                        plays = 0
-
+                        // Wait 1 second before turn cards invisible
                         handler.postDelayed({
-                            cardDefault.setImageResource(R.drawable.mg_card_back)
-                            selectedCardImageView?.setImageResource(R.drawable.mg_card_back)
+                            // PreviousItem
+                            previousItemView!!.visibility = View.INVISIBLE
+                            previousItemView!!.isEnabled = false
+
+                            // Actual Item
+                            itemView.visibility = View.INVISIBLE
+                            itemView.isEnabled = false
 
                             previousItemView = null
+                            cardsMatched = true
 
-                            // Losing Points if cards don't combine
-                            if(gameType == MemoryGameGameTypes.SINGLEPLAYER) {
-                                singleplayerPoints = checkPontuation(Operations.MINUS, singleplayerPoints)
-                                textView1.text = "Pontos: ${singleplayerPoints}"
-                            } else if(gameType == MemoryGameGameTypes.TWOPLAYERS) {
-                                if(turn == PlayerTurn.PLAYER1) {
-                                    firstPlayerPoints = checkPontuation(Operations.MINUS, firstPlayerPoints)
+                            Log.i("MEMORY_GAME", "COMBINOU AS CARTAS")
+
+                            selectedCard = initialCard
+                            plays = 0
+
+                            // Pontuation and Time Manipulation
+                            if (gameType == MemoryGameGameTypes.SINGLEPLAYER) {
+                                singleplayerPoints =
+                                    checkPontuation(Operations.PLUS, singleplayerPoints)
+                                textView1.text = "Pontos: $singleplayerPoints"
+                                singleplayerCombinations++
+                            } else if (gameType == MemoryGameGameTypes.TWOPLAYERS) {
+                                if (turn == PlayerTurn.PLAYER1) {
+                                    firstPlayerPoints =
+                                        checkPontuation(Operations.PLUS, firstPlayerPoints)
                                     textView1.text = "1º Jogador: $firstPlayerPoints"
-                                    turn = PlayerTurn.PLAYER2
-                                    changeTurnColors(turn, playerTurnColor, playerDefaultColor)
-                                } else if(turn == PlayerTurn.PLAYER2) {
-                                    secondPlayerPoints = checkPontuation(Operations.MINUS, secondPlayerPoints)
+                                    firstPlayerCombinations++
+                                } else if (turn == PlayerTurn.PLAYER2) {
+                                    secondPlayerPoints =
+                                        checkPontuation(Operations.PLUS, secondPlayerPoints)
                                     textView2.text = "2º Jogador: $secondPlayerPoints"
-                                    turn = PlayerTurn.PLAYER1
-                                    changeTurnColors(turn, playerTurnColor, playerDefaultColor)
+                                    secondPlayerCombinations++
                                 }
-                            } else if(gameType == MemoryGameGameTypes.COUNTDOWN) {
-                                // SE ERRAR ACONTECE AQUI:
-                                countdownPoints = checkPontuation(Operations.MINUS, countdownPoints)
-                                textView1.text = "Pontos: ${countdownPoints}"
+                            } else if (gameType == MemoryGameGameTypes.COUNTDOWN) {
+                                countDownTimer?.cancel()
+                                timeLeftInMillis += timeGainedInMillis
+                                startCountdownCounter()
+                                updateCountdownUI()
+                                countdownCombinations++
+                                countdownPoints = checkPontuation(Operations.PLUS, countdownPoints)
+                                textView1.text = "Pontos: $countdownPoints"
                             }
-
                             itemView.isEnabled = true
+                            clicksCounter = 0
                         }, 1000)
 
-                        selectedCard = initialCard
                     } else {
-                        plays++
+                        Log.i(
+                            "MEMORY_GAME",
+                            "${card.imageSrc} NÃO ESTAVA NO ARRAY E FOI ADICIONADO"
+                        )
+
+                        selectedCard = card
+
+                        if (plays == 0) {
+                            selectedCardImageView = cardDefault
+                            previousItemView = itemView
+                            previousItemView!!.isEnabled = false
+                        } else {
+                            previousItemView!!.isEnabled = true
+                        }
+
+                        if (plays == 1 && !cardsMatched) {
+                            Log.i("MEMORY_GAME", "JOGOU 2X E NAO COMBINOU")
+                            plays = 0
+
+                            handler.postDelayed({
+                                cardDefault.setImageResource(R.drawable.mg_card_back)
+                                selectedCardImageView?.setImageResource(R.drawable.mg_card_back)
+
+                                previousItemView = null
+
+                                // Losing Points if cards don't combine
+                                if (gameType == MemoryGameGameTypes.SINGLEPLAYER) {
+                                    singleplayerPoints =
+                                        checkPontuation(Operations.MINUS, singleplayerPoints)
+                                    textView1.text = "Pontos: ${singleplayerPoints}"
+                                } else if (gameType == MemoryGameGameTypes.TWOPLAYERS) {
+                                    if (turn == PlayerTurn.PLAYER1) {
+                                        firstPlayerPoints =
+                                            checkPontuation(Operations.MINUS, firstPlayerPoints)
+                                        textView1.text = "1º Jogador: $firstPlayerPoints"
+                                        turn = PlayerTurn.PLAYER2
+                                        changeTurnColors(turn, playerTurnColor, playerDefaultColor)
+                                    } else if (turn == PlayerTurn.PLAYER2) {
+                                        secondPlayerPoints =
+                                            checkPontuation(Operations.MINUS, secondPlayerPoints)
+                                        textView2.text = "2º Jogador: $secondPlayerPoints"
+                                        turn = PlayerTurn.PLAYER1
+                                        changeTurnColors(turn, playerTurnColor, playerDefaultColor)
+                                    }
+                                } else if (gameType == MemoryGameGameTypes.COUNTDOWN) {
+                                    // SE ERRAR ACONTECE AQUI:
+                                    countdownPoints =
+                                        checkPontuation(Operations.MINUS, countdownPoints)
+                                    textView1.text = "Pontos: ${countdownPoints}"
+                                }
+
+                                itemView.isEnabled = true
+                                clicksCounter = 0
+                            }, 1000)
+
+                            selectedCard = initialCard
+                        } else {
+                            plays++
+                        }
+                        cardsMatched = false
                     }
-                    cardsMatched = false
+                    itemView.isEnabled = false
                 }
-                itemView.isEnabled = false
             }
         }
     }
@@ -222,8 +247,8 @@ class CardsAdapter(
     override fun onBindViewHolder(holder: CardsViewHolder, position: Int) {
         val card = list[position]
         holder.bind(card)
-        
-        if(gameType == MemoryGameGameTypes.SINGLEPLAYER) {
+
+        if (gameType == MemoryGameGameTypes.SINGLEPLAYER) {
             startCountUpTimer()
         }
 
@@ -236,26 +261,26 @@ class CardsAdapter(
         return list.size
     }
 
-    private fun checkPontuation(operation: Operations, actualPoints: Int) : Int {
+    private fun checkPontuation(operation: Operations, actualPoints: Int): Int {
         val pointsToWin = 20
         val pointsToLose = 5
         var result = actualPoints
 
-        if(operation == Operations.PLUS) {
+        if (operation == Operations.PLUS) {
             result = actualPoints + pointsToWin
-        } else if(operation == Operations.MINUS) {
-            if(result != 0) {
-                result  = actualPoints - pointsToLose
+        } else if (operation == Operations.MINUS) {
+            if (result != 0) {
+                result = actualPoints - pointsToLose
             }
         }
         return result
     }
 
     fun changeTurnColors(newTurn: PlayerTurn, turnColor: Int, defaultColor: Int) {
-        if(newTurn == PlayerTurn.PLAYER1) {
+        if (newTurn == PlayerTurn.PLAYER1) {
             textView2.setTextColor(defaultColor)
             textView1.setTextColor(turnColor)
-        } else if(newTurn == PlayerTurn.PLAYER2) {
+        } else if (newTurn == PlayerTurn.PLAYER2) {
             textView1.setTextColor(defaultColor)
             textView2.setTextColor(turnColor)
         }
@@ -282,7 +307,8 @@ class CardsAdapter(
 
             override fun onFinish() {
                 // When counter finish
-                val message = "ESTATÍSTICAS\nCombinações: ${countdownCombinations}\nPontos feitos: $countdownPoints"
+                val message =
+                    "ESTATÍSTICAS\nCombinações: ${countdownCombinations}\nPontos feitos: $countdownPoints"
                 endgameDialog(context, "Seu tempo ACABOU!", message)
             }
         }.start()
@@ -320,25 +346,31 @@ class CardsAdapter(
 
     private fun showEndgameDialog() {
         var message = ""
-        when(gameType) {
+        when (gameType) {
             MemoryGameGameTypes.SINGLEPLAYER -> {
                 countUpTimer?.stop()
                 val minutes = (timeElapsed / 1000) / 60
                 val seconds = (timeElapsed / 1000) % 60
                 val finalTimeElapsed = String.format("%02d:%02d", minutes, seconds)
-                message = "ESTATÍSTICAS\nCombinações: ${singleplayerCombinations}\nPontos feitos: $singleplayerPoints\nDuração: $finalTimeElapsed"
+                message =
+                    "ESTATÍSTICAS\nCombinações: ${singleplayerCombinations}\nPontos feitos: $singleplayerPoints\nDuração: $finalTimeElapsed"
             }
+
             MemoryGameGameTypes.TWOPLAYERS -> {
-                message = "ESTATÍSTICAS\n=> Jogador 1 <=\nCombinações: ${firstPlayerCombinations}\nPontos: $firstPlayerPoints\n\n" +
-                        "=> Jogador 2 <=\nCombinações: $secondPlayerCombinations\nPontos: $secondPlayerPoints"
+                message =
+                    "ESTATÍSTICAS\n=> Jogador 1 <=\nCombinações: ${firstPlayerCombinations}\nPontos: $firstPlayerPoints\n\n" +
+                            "=> Jogador 2 <=\nCombinações: $secondPlayerCombinations\nPontos: $secondPlayerPoints"
             }
+
             MemoryGameGameTypes.COUNTDOWN -> {
                 countDownTimer?.cancel()
                 val minutes = (timeLeft / 1000) / 60
                 val seconds = (timeLeft / 1000) % 60
                 val finalTimeLeft = String.format("%02d:%02d", minutes, seconds)
-                message = "ESTATÍSTICAS\nCombinações: ${countdownCombinations}\nPontos feitos: $countdownPoints\nTempo restante: $finalTimeLeft"
+                message =
+                    "ESTATÍSTICAS\nCombinações: ${countdownCombinations}\nPontos feitos: $countdownPoints\nTempo restante: $finalTimeLeft"
             }
+
             else -> {
                 message = "HOUVE ALGUM ERRO"
             }
