@@ -52,50 +52,50 @@ class MemoryGameGameActivity : AppCompatActivity() {
             }
         }
 
-        // 10 Different Cards = 20 Pairs
+        // 16 Different Cards = 32 Pairs
         val cards = listOf(
             Card(R.drawable.mg_audiotrack_24),
             Card(R.drawable.mg_audiotrack_24),
-
             Card(R.drawable.mg_celebration_24),
             Card(R.drawable.mg_celebration_24),
-
             Card(R.drawable.mg_star_24),
             Card(R.drawable.mg_star_24),
-
             Card(R.drawable.mg_sports_motorsports_24),
             Card(R.drawable.mg_sports_motorsports_24),
-
             Card(R.drawable.mg_vpn_key_24),
             Card(R.drawable.mg_vpn_key_24),
-
             Card(R.drawable.mg_work_24),
             Card(R.drawable.mg_work_24),
-
             Card(R.drawable.mg_sports_martial_arts_24),
             Card(R.drawable.mg_sports_martial_arts_24),
-
             Card(R.drawable.mg_sports_esports_24),
             Card(R.drawable.mg_sports_esports_24),
-
             Card(R.drawable.mg_spoke_24),
             Card(R.drawable.mg_spoke_24),
-
             Card(R.drawable.mg_wb_sunny_24),
-            Card(R.drawable.mg_wb_sunny_24)
+            Card(R.drawable.mg_wb_sunny_24),
+            Card(R.drawable.mg_watch_24),
+            Card(R.drawable.mg_watch_24),
+            Card(R.drawable.mg_wc_24),
+            Card(R.drawable.mg_wc_24),
+            Card(R.drawable.mg_workspace_premium_24),
+            Card(R.drawable.mg_workspace_premium_24),
+            Card(R.drawable.mg_volume_up_24),
+            Card(R.drawable.mg_volume_up_24),
+            Card(R.drawable.mg_videogame_asset_24),
+            Card(R.drawable.mg_videogame_asset_24),
+            Card(R.drawable.mg_vaping_rooms_24),
+            Card(R.drawable.mg_vaping_rooms_24)
         )
 
-        // Método Original
-        //val shuffledCards = cards.shuffled().toMutableList()
-        //rvContainer.adapter = CardsAdapter(shuffledCards)
+        // Original Method
+        val shuffledCards = cards.shuffled().toMutableList()
+        rvContainer.adapter = CardsAdapter(this, shuffledCards, gameType, textView1, textView2, endgameButton)
 
         // Tests
-        val treatedCards = cards.toMutableList()
-        rvContainer.adapter = CardsAdapter(this, treatedCards, gameType, textView1, textView2, endgameButton)
+        //val treatedCards = cards.toMutableList()
+        //rvContainer.adapter = CardsAdapter(this, treatedCards, gameType, textView1, textView2, endgameButton)
 
         rvContainer.layoutManager = GridLayoutManager(this, 4)
-
-        // Separar no LOG Temporário
-        Log.i("MEMORY_GAME", "==========================================================================================================")
     }
 }

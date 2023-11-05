@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import androidx.appcompat.app.AppCompatDelegate
 import com.wcsm.touchgames.guessthenumber.GuessTheNumberMenuActivity
 import com.wcsm.touchgames.jokenpo.JokenpoActivity
 

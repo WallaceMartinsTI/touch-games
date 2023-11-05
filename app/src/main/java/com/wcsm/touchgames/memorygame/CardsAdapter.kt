@@ -14,6 +14,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.wcsm.touchgames.MainActivity
@@ -44,7 +45,6 @@ class CardsAdapter(
 
     private var clicksCounter = 0
 
-
     // Singleplayer Variables
     private var singleplayerPoints = 0
     private var countUpTimer: CountUpTimer? = null
@@ -63,8 +63,6 @@ class CardsAdapter(
     private var countDownTimer: CountDownTimer? = null
     private var countdownCombinations = 0
     private var timeLeftInMillis: Long = 60000
-
-    //private var timeLeftInMillis: Long = 7000 -> low time for tests
     private var timeGainedInMillis: Long = 15000
     private var timeLeft: Long = 0
 
@@ -103,26 +101,25 @@ class CardsAdapter(
                 textView1.setTextColor(playerTurnColor)
             }
 
-            cardDefault.setImageResource(R.drawable.mg_card_back) // código para mostrar os quadrados (carta pra baixo)
-            //cardDefault.setImageResource(card.imageSrc) // código para mostrar os cards
+            cardDefault.setImageResource(R.drawable.mg_card_back) // original methods (show cards hidden)
+            //cardDefault.setImageResource(card.imageSrc) // code to show cards
 
             itemView.setOnClickListener {
                 clicksCounter++
-                Log.i("MEMORY_GAME", "Clicks: $clicksCounter")
 
                 if (clicksCounter <= 2) {
                     // Cards Manipulation
-                    Log.i(
-                        "MEMORY_GAME",
-                        "===================================================================="
-                    )
                     cardDefault.setImageResource(card.imageSrc)
 
                     if (card == selectedCard) {
-                        Log.i("MEMORY_GAME", "${card.imageSrc} JÁ ESTÁ NO ARRAY")
-
                         // Wait 1 second before turn cards invisible
                         handler.postDelayed({
+                            card.isMatched = true
+                            selectedCard.isMatched = true
+
+                            // Check if all cards are matched and reset if necessary
+                            checkCardsMatchedAndReset()
+
                             // PreviousItem
                             previousItemView!!.visibility = View.INVISIBLE
                             previousItemView!!.isEnabled = false
@@ -133,8 +130,6 @@ class CardsAdapter(
 
                             previousItemView = null
                             cardsMatched = true
-
-                            Log.i("MEMORY_GAME", "COMBINOU AS CARTAS")
 
                             selectedCard = initialCard
                             plays = 0
@@ -169,13 +164,7 @@ class CardsAdapter(
                             itemView.isEnabled = true
                             clicksCounter = 0
                         }, 1000)
-
                     } else {
-                        Log.i(
-                            "MEMORY_GAME",
-                            "${card.imageSrc} NÃO ESTAVA NO ARRAY E FOI ADICIONADO"
-                        )
-
                         selectedCard = card
 
                         if (plays == 0) {
@@ -187,9 +176,7 @@ class CardsAdapter(
                         }
 
                         if (plays == 1 && !cardsMatched) {
-                            Log.i("MEMORY_GAME", "JOGOU 2X E NAO COMBINOU")
                             plays = 0
-
                             handler.postDelayed({
                                 cardDefault.setImageResource(R.drawable.mg_card_back)
                                 selectedCardImageView?.setImageResource(R.drawable.mg_card_back)
@@ -216,7 +203,6 @@ class CardsAdapter(
                                         changeTurnColors(turn, playerTurnColor, playerDefaultColor)
                                     }
                                 } else if (gameType == MemoryGameGameTypes.COUNTDOWN) {
-                                    // SE ERRAR ACONTECE AQUI:
                                     countdownPoints =
                                         checkPontuation(Operations.MINUS, countdownPoints)
                                     textView1.text = "Pontos: ${countdownPoints}"
@@ -330,7 +316,6 @@ class CardsAdapter(
                 val intent = Intent(context, MemoryGameMenuActivity::class.java)
                 context.startActivity(intent)
 
-                Log.i("MEMORY_GAME", "CONFIRMOU DIALOG")
                 dialog.dismiss()
             }
             .setNegativeButton("Menu Inicial") { dialog, _ ->
@@ -338,7 +323,6 @@ class CardsAdapter(
                 val intent = Intent(context, MainActivity::class.java)
                 context.startActivity(intent)
 
-                Log.i("MEMORY_GAME", "CANCELOU DIALOG")
                 dialog.dismiss()
             }
             .show()
@@ -376,5 +360,20 @@ class CardsAdapter(
             }
         }
         endgameDialog(context, "Fim de Jogo!", message)
+    }
+
+    private fun checkAllCardsMatched(): Boolean {
+        for(card in list) {
+            if(!card.isMatched) {
+                return false
+            }
+        }
+        return true
+    }
+
+    private fun checkCardsMatchedAndReset() {
+        if(checkAllCardsMatched()) {
+            showEndgameDialog()
+        }
     }
 }

@@ -11,4 +11,8 @@
 
     <!-- GAME - MEMORY GAME -->
     <color name="mg_player_turn">#FFD700</color>
+
+    <!-- DARK THEME -->
+    <color name="dark_primary">#361275</color>
+
 </resources>
