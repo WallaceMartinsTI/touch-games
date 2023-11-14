@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_touch_app_24"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TouchGames"
+        android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
             android:name=".memorygame.MemoryGameGameActivity"

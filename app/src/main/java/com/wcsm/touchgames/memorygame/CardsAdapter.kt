@@ -248,8 +248,8 @@ class CardsAdapter(
     }
 
     private fun checkPontuation(operation: Operations, actualPoints: Int): Int {
-        val pointsToWin = 25
-        val pointsToLose = 5
+        val pointsToWin = 30
+        val pointsToLose = 2
         var result = actualPoints
 
         if (operation == Operations.PLUS) {
