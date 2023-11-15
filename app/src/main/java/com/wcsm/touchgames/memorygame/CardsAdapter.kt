@@ -13,8 +13,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.wcsm.touchgames.MainActivity
@@ -26,7 +26,7 @@ enum class PlayerTurn {
 
 class CardsAdapter(
     private val context: Context,
-    private val list: MutableList<Card>,
+    private var list: MutableList<Card>,
     private val gameType: MemoryGameGameTypes?,
     private var textView1: TextView,
     private var textView2: TextView,
@@ -54,19 +54,30 @@ class CardsAdapter(
     // Two Players Variables
     private var firstPlayerPoints = 0
     private var secondPlayerPoints = 0
-    private var turn = PlayerTurn.PLAYER1
+    private var playerTurn: PlayerTurn? = null //PlayerTurn.PLAYER1
     private var firstPlayerCombinations = 0
     private var secondPlayerCombinations = 0
+    private var playerTurnColor = ContextCompat.getColor(context, R.color.mg_player_turn)
+    private var playerDefaultColor = ContextCompat.getColor(context, R.color.black)
 
     // Countdown Variables
     private var countdownPoints = 0
     private var countDownTimer: CountDownTimer? = null
     private var countdownCombinations = 0
-    private var timeLeftInMillis: Long = 60000
-    private var timeGainedInMillis: Long = 15000
+    private var timeLeftInMillis: Long = 60000 //PROD: 60000, HML: 15000
+    private var timeGainedInMillis: Long = 12000 //PROD: 12000, HML: 5000
     private var timeLeft: Long = 0
 
+    // Reset Game
+    private var itemViewList: MutableList<View> = mutableListOf()
+    private var cardsDefaultList: MutableList<ImageView> = mutableListOf()
+
     init {
+        if(playerTurn == null) {
+            playerTurn = PlayerTurn.PLAYER1
+            changeTurnColors(playerTurn!!, playerTurnColor, playerDefaultColor)
+        }
+
         countUpTimer = object : CountUpTimer(1000) {
             override fun onTick(elapsedTime: Long) {
                 timeElapsed = elapsedTime
@@ -88,21 +99,13 @@ class CardsAdapter(
         PLUS, MINUS
     }
 
-
-    inner class CardsViewHolder(private val itemView: View) : ViewHolder(itemView) {
+    inner class CardsViewHolder(itemView: View) : ViewHolder(itemView) {
         private val cardDefault: ImageView = itemView.findViewById(R.id.mg_card_default)
 
-        private var playerTurnColor =
-            ContextCompat.getColor(itemView.context, R.color.mg_player_turn)
-        private var playerDefaultColor = ContextCompat.getColor(itemView.context, R.color.black)
-
         fun bind(card: Card) {
-            if (gameType == MemoryGameGameTypes.TWOPLAYERS) {
-                textView1.setTextColor(playerTurnColor)
-            }
-
             cardDefault.setImageResource(R.drawable.mg_card_back) // original methods (show cards hidden)
             //cardDefault.setImageResource(card.imageSrc) // code to show cards
+            cardsDefaultList.add(cardDefault)
 
             itemView.setOnClickListener {
                 clicksCounter++
@@ -114,11 +117,12 @@ class CardsAdapter(
                     if (card == selectedCard) {
                         // Wait 1 second before turn cards invisible
                         handler.postDelayed({
+
+                            itemViewList.add(previousItemView!!)
+                            itemViewList.add(itemView)
+
                             card.isMatched = true
                             selectedCard.isMatched = true
-
-                            // Check if all cards are matched and reset if necessary
-                            checkCardsMatchedAndReset()
 
                             // PreviousItem
                             previousItemView!!.visibility = View.INVISIBLE
@@ -127,6 +131,9 @@ class CardsAdapter(
                             // Actual Item
                             itemView.visibility = View.INVISIBLE
                             itemView.isEnabled = false
+
+                            // Check if all cards are matched and reset if necessary
+                            checkCardsMatchedAndReset()
 
                             previousItemView = null
                             cardsMatched = true
@@ -141,18 +148,19 @@ class CardsAdapter(
                                 textView1.text = "Pontos: $singleplayerPoints"
                                 singleplayerCombinations++
                             } else if (gameType == MemoryGameGameTypes.TWOPLAYERS) {
-                                if (turn == PlayerTurn.PLAYER1) {
+                                if (playerTurn == PlayerTurn.PLAYER1) {
                                     firstPlayerPoints =
                                         checkPontuation(Operations.PLUS, firstPlayerPoints)
                                     textView1.text = "1º Jogador: $firstPlayerPoints"
                                     firstPlayerCombinations++
-                                } else if (turn == PlayerTurn.PLAYER2) {
+                                } else if (playerTurn == PlayerTurn.PLAYER2) {
                                     secondPlayerPoints =
                                         checkPontuation(Operations.PLUS, secondPlayerPoints)
                                     textView2.text = "2º Jogador: $secondPlayerPoints"
                                     secondPlayerCombinations++
                                 }
                             } else if (gameType == MemoryGameGameTypes.COUNTDOWN) {
+                                showGainedMinutesInCountdown()
                                 countDownTimer?.cancel()
                                 timeLeftInMillis += timeGainedInMillis
                                 startCountdownCounter()
@@ -189,18 +197,18 @@ class CardsAdapter(
                                         checkPontuation(Operations.MINUS, singleplayerPoints)
                                     textView1.text = "Pontos: ${singleplayerPoints}"
                                 } else if (gameType == MemoryGameGameTypes.TWOPLAYERS) {
-                                    if (turn == PlayerTurn.PLAYER1) {
+                                    if (playerTurn == PlayerTurn.PLAYER1) {
                                         firstPlayerPoints =
                                             checkPontuation(Operations.MINUS, firstPlayerPoints)
                                         textView1.text = "1º Jogador: $firstPlayerPoints"
-                                        turn = PlayerTurn.PLAYER2
-                                        changeTurnColors(turn, playerTurnColor, playerDefaultColor)
-                                    } else if (turn == PlayerTurn.PLAYER2) {
+                                        playerTurn = PlayerTurn.PLAYER2
+                                        changeTurnColors(playerTurn!!, playerTurnColor, playerDefaultColor)
+                                    } else if (playerTurn == PlayerTurn.PLAYER2) {
                                         secondPlayerPoints =
                                             checkPontuation(Operations.MINUS, secondPlayerPoints)
                                         textView2.text = "2º Jogador: $secondPlayerPoints"
-                                        turn = PlayerTurn.PLAYER1
-                                        changeTurnColors(turn, playerTurnColor, playerDefaultColor)
+                                        playerTurn = PlayerTurn.PLAYER1
+                                        changeTurnColors(playerTurn!!, playerTurnColor, playerDefaultColor)
                                     }
                                 } else if (gameType == MemoryGameGameTypes.COUNTDOWN) {
                                     countdownPoints =
@@ -243,6 +251,14 @@ class CardsAdapter(
         }
     }
 
+    private fun checkCardsMatchedAndReset() {
+        if(checkAllCardsMatched()) {
+            // All cards matched
+            //showEndgameDialog() -> finish game when all cards are flipped
+            (context as? MemoryGameGameActivity)?.restartGame()
+        }
+    }
+
     override fun getItemCount(): Int {
         return list.size
     }
@@ -262,7 +278,7 @@ class CardsAdapter(
         return result
     }
 
-    fun changeTurnColors(newTurn: PlayerTurn, turnColor: Int, defaultColor: Int) {
+    private fun changeTurnColors(newTurn: PlayerTurn, turnColor: Int, defaultColor: Int) {
         if (newTurn == PlayerTurn.PLAYER1) {
             textView2.setTextColor(defaultColor)
             textView1.setTextColor(turnColor)
@@ -371,9 +387,26 @@ class CardsAdapter(
         return true
     }
 
-    private fun checkCardsMatchedAndReset() {
-        if(checkAllCardsMatched()) {
-            showEndgameDialog()
+    private fun showGainedMinutesInCountdown() {
+        val formattedSeconds = timeGainedInMillis / 1000
+        Toast.makeText(context, "+$formattedSeconds segundos!", Toast.LENGTH_SHORT).show()
+    }
+
+    fun resetCards(newList: MutableList<Card>) {
+        list.forEach {
+            it.isMatched = false
         }
+
+        itemViewList.forEach {
+            it.visibility = View.VISIBLE
+            it.isEnabled = true
+        }
+
+        cardsDefaultList.forEach {
+            it.setImageResource(R.drawable.mg_card_back)
+        }
+
+        list = newList
+        notifyDataSetChanged()
     }
 }

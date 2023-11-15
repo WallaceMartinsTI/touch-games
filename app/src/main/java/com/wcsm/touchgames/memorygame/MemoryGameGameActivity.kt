@@ -13,11 +13,49 @@ import com.wcsm.touchgames.R
 
 class MemoryGameGameActivity : AppCompatActivity() {
 
+    private lateinit var rvContainer: RecyclerView
+
+    // 16 Different Cards = 32 Pairs
+    private val cards = listOf(
+        Card(R.drawable.mg_audiotrack_24),
+        Card(R.drawable.mg_audiotrack_24),
+        Card(R.drawable.mg_celebration_24),
+        Card(R.drawable.mg_celebration_24),
+        Card(R.drawable.mg_star_24),
+        Card(R.drawable.mg_star_24),
+        Card(R.drawable.mg_sports_motorsports_24),
+        Card(R.drawable.mg_sports_motorsports_24),
+        Card(R.drawable.mg_vpn_key_24),
+        Card(R.drawable.mg_vpn_key_24),
+        Card(R.drawable.mg_work_24),
+        Card(R.drawable.mg_work_24),
+        Card(R.drawable.mg_sports_martial_arts_24),
+        Card(R.drawable.mg_sports_martial_arts_24),
+        Card(R.drawable.mg_sports_esports_24),
+        Card(R.drawable.mg_sports_esports_24),
+        Card(R.drawable.mg_spoke_24),
+        Card(R.drawable.mg_spoke_24),
+        Card(R.drawable.mg_wb_sunny_24),
+        Card(R.drawable.mg_wb_sunny_24),
+        Card(R.drawable.mg_watch_24),
+        Card(R.drawable.mg_watch_24),
+        Card(R.drawable.mg_wc_24),
+        Card(R.drawable.mg_wc_24),
+        Card(R.drawable.mg_workspace_premium_24),
+        Card(R.drawable.mg_workspace_premium_24),
+        Card(R.drawable.mg_volume_up_24),
+        Card(R.drawable.mg_volume_up_24),
+        Card(R.drawable.mg_videogame_asset_24),
+        Card(R.drawable.mg_videogame_asset_24),
+        Card(R.drawable.mg_vaping_rooms_24),
+        Card(R.drawable.mg_vaping_rooms_24)
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_memory_game_game)
 
-        val rvContainer: RecyclerView = findViewById(R.id.mg_rv_container)
+        rvContainer = findViewById(R.id.mg_rv_container)
         val btnPreviousScreen: Button = findViewById(R.id.mg_btn_previous_screen)
 
         btnPreviousScreen.setOnClickListener {
@@ -52,42 +90,6 @@ class MemoryGameGameActivity : AppCompatActivity() {
             }
         }
 
-        // 16 Different Cards = 32 Pairs
-        val cards = listOf(
-            Card(R.drawable.mg_audiotrack_24),
-            Card(R.drawable.mg_audiotrack_24),
-            Card(R.drawable.mg_celebration_24),
-            Card(R.drawable.mg_celebration_24),
-            Card(R.drawable.mg_star_24),
-            Card(R.drawable.mg_star_24),
-            Card(R.drawable.mg_sports_motorsports_24),
-            Card(R.drawable.mg_sports_motorsports_24),
-            Card(R.drawable.mg_vpn_key_24),
-            Card(R.drawable.mg_vpn_key_24),
-            Card(R.drawable.mg_work_24),
-            Card(R.drawable.mg_work_24),
-            Card(R.drawable.mg_sports_martial_arts_24),
-            Card(R.drawable.mg_sports_martial_arts_24),
-            Card(R.drawable.mg_sports_esports_24),
-            Card(R.drawable.mg_sports_esports_24),
-            Card(R.drawable.mg_spoke_24),
-            Card(R.drawable.mg_spoke_24),
-            Card(R.drawable.mg_wb_sunny_24),
-            Card(R.drawable.mg_wb_sunny_24),
-            Card(R.drawable.mg_watch_24),
-            Card(R.drawable.mg_watch_24),
-            Card(R.drawable.mg_wc_24),
-            Card(R.drawable.mg_wc_24),
-            Card(R.drawable.mg_workspace_premium_24),
-            Card(R.drawable.mg_workspace_premium_24),
-            Card(R.drawable.mg_volume_up_24),
-            Card(R.drawable.mg_volume_up_24),
-            Card(R.drawable.mg_videogame_asset_24),
-            Card(R.drawable.mg_videogame_asset_24),
-            Card(R.drawable.mg_vaping_rooms_24),
-            Card(R.drawable.mg_vaping_rooms_24)
-        )
-
         // Original Method
         val shuffledCards = cards.shuffled().toMutableList()
         rvContainer.adapter = CardsAdapter(this, shuffledCards, gameType, textView1, textView2, endgameButton)
@@ -97,5 +99,12 @@ class MemoryGameGameActivity : AppCompatActivity() {
         //rvContainer.adapter = CardsAdapter(this, treatedCards, gameType, textView1, textView2, endgameButton)
 
         rvContainer.layoutManager = GridLayoutManager(this, 4)
+    }
+
+    fun restartGame() {
+        val newShuffledCards = cards.shuffled().toMutableList()
+        (rvContainer.adapter as? CardsAdapter)?.apply {
+            resetCards(newShuffledCards)
+        }
     }
 }
