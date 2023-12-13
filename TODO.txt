@@ -1,1 +1,1 @@
-Arrumar BUG q o "Pontos" do modo singleplayer e countdown estão coloridos
+(FEITO) Arrumar BUG q o "Pontos" do modo singleplayer e countdown estão coloridos

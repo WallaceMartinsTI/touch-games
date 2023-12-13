@@ -73,10 +73,10 @@ class CardsAdapter(
     private var cardsDefaultList: MutableList<ImageView> = mutableListOf()
 
     init {
-        if(playerTurn == null) {
+        /*if(playerTurn == null) {
             playerTurn = PlayerTurn.PLAYER1
             changeTurnColors(playerTurn!!, playerTurnColor, playerDefaultColor)
-        }
+        }*/
 
         countUpTimer = object : CountUpTimer(1000) {
             override fun onTick(elapsedTime: Long) {
@@ -86,6 +86,10 @@ class CardsAdapter(
         }
 
         if (gameType == MemoryGameGameTypes.TWOPLAYERS) {
+            if(playerTurn == null) {
+                playerTurn = PlayerTurn.PLAYER1
+                changeTurnColors(playerTurn!!, playerTurnColor, playerDefaultColor)
+            }
             textView1.text = "1º Jogador: $firstPlayerPoints"
             textView2.text = "2º Jogador: $secondPlayerPoints"
         } else if (gameType == MemoryGameGameTypes.COUNTDOWN) {
