@@ -29,7 +29,15 @@ class GuessTheNumberGameActivity : AppCompatActivity() {
         val attemptsQuantityField: TextView = findViewById(R.id.attempts_quantity)
         val winTextField: TextView = findViewById(R.id.gtn_win_text)
 
-        var randomNumber = generateRandomNumber(difficulty)
+        val maxNumber = when(difficulty) {
+            "easy" -> 5
+            "medium" -> 10
+            "hard" -> 50
+            "insane" -> 100
+            else -> 0
+        }
+
+        var randomNumber = generateRandomNumber(maxNumber)
         var attempts = 0
 
         // Clear all states for the New Game
@@ -39,7 +47,7 @@ class GuessTheNumberGameActivity : AppCompatActivity() {
             winTextField.text = ""
             guessInputText.text?.clear()
             attemptsQuantityField.text = attempts.toString()
-            randomNumber = generateRandomNumber(difficulty)
+            randomNumber = generateRandomNumber(maxNumber)
         }
 
         btnGuess.setOnClickListener {
@@ -47,6 +55,8 @@ class GuessTheNumberGameActivity : AppCompatActivity() {
 
             if (userGuessInputed.isEmpty()) {
                 guessTextInputLayout.error = "Este campo é obrigatório"
+            } else if (userGuessInputed.toInt() !in 1..maxNumber) {
+                guessTextInputLayout.error = "Número inváido (1 a $maxNumber)"
             } else {
                 guessTextInputLayout.error = null
 
@@ -72,14 +82,8 @@ class GuessTheNumberGameActivity : AppCompatActivity() {
 
         setDifficultyChoosen(difficulty)
     }
-    private fun generateRandomNumber(difficulty: String?): Int {
-        val max = when (difficulty) {
-            "easy" -> 5
-            "medium" -> 10
-            "hard" -> 50
-            "insane" -> 100
-            else -> 0
-        }
+
+    private fun generateRandomNumber(max: Int): Int {
         return Random.nextInt(1, max + 1)
     }
 

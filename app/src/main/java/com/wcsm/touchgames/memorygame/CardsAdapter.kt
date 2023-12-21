@@ -73,11 +73,6 @@ class CardsAdapter(
     private var cardsDefaultList: MutableList<ImageView> = mutableListOf()
 
     init {
-        /*if(playerTurn == null) {
-            playerTurn = PlayerTurn.PLAYER1
-            changeTurnColors(playerTurn!!, playerTurnColor, playerDefaultColor)
-        }*/
-
         countUpTimer = object : CountUpTimer(1000) {
             override fun onTick(elapsedTime: Long) {
                 timeElapsed = elapsedTime
