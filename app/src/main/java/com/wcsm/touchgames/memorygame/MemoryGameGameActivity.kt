@@ -2,16 +2,18 @@ package com.wcsm.touchgames.memorygame
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wcsm.touchgames.R
+import com.wcsm.touchgames.databinding.ActivityMemoryGameGameBinding
 
 class MemoryGameGameActivity : AppCompatActivity() {
+
+    private val binding by lazy {
+        ActivityMemoryGameGameBinding.inflate(layoutInflater)
+    }
 
     private lateinit var rvContainer: RecyclerView
 
@@ -53,18 +55,18 @@ class MemoryGameGameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_memory_game_game)
+        setContentView(binding.root)
 
-        rvContainer = findViewById(R.id.mg_rv_container)
-        val btnPreviousScreen: Button = findViewById(R.id.mg_btn_previous_screen)
+        rvContainer = binding.mgRvContainer
+        val btnPreviousScreen = binding.mgBtnPreviousScreen
 
         btnPreviousScreen.setOnClickListener {
             finish()
         }
 
-        val endgameButton: Button = findViewById(R.id.mg_btn_endgame)
-        val textView1: TextView = findViewById(R.id.mg_textView1)
-        val textView2: TextView = findViewById(R.id.mg_textView2)
+        val endgameButton = binding.mgBtnEndgame
+        val textView1 = binding.mgTextView1
+        val textView2 = binding.mgTextView2
 
         var gameType: MemoryGameGameTypes? = null
 

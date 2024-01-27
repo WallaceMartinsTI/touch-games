@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.CountDownTimer
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.wcsm.touchgames.MainActivity
 import com.wcsm.touchgames.R
+import com.wcsm.touchgames.databinding.MgCardsBinding
 
 enum class PlayerTurn {
     PLAYER1, PLAYER2
@@ -98,8 +98,8 @@ class CardsAdapter(
         PLUS, MINUS
     }
 
-    inner class CardsViewHolder(itemView: View) : ViewHolder(itemView) {
-        private val cardDefault: ImageView = itemView.findViewById(R.id.mg_card_default)
+    inner class CardsViewHolder(val binding: MgCardsBinding) : ViewHolder(binding.root) {
+        private val cardDefault = binding.mgCardDefault
 
         fun bind(card: Card) {
             cardDefault.setImageResource(R.drawable.mg_card_back) // original methods (show cards hidden)
@@ -233,8 +233,8 @@ class CardsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val itemView = layoutInflater.inflate(R.layout.mg_cards, parent, false)
-        return CardsViewHolder(itemView)
+        val binding = MgCardsBinding.inflate(layoutInflater, parent, false)
+        return CardsViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: CardsViewHolder, position: Int) {

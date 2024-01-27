@@ -7,9 +7,12 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.wcsm.touchgames.R
+import com.wcsm.touchgames.databinding.ActivityJokenpoBinding
 import kotlin.random.Random
 
 class JokenpoActivity : AppCompatActivity() {
+
+    private val binding by lazy {ActivityJokenpoBinding.inflate(layoutInflater)}
 
     private lateinit var imageApp: ImageView
     private lateinit var resultField: TextView
@@ -19,13 +22,13 @@ class JokenpoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_jokenpo)
+        setContentView(binding.root)
 
-        imageApp = findViewById(R.id.jkp_image_app)
-        resultField = findViewById(R.id.jkp_result)
-        appPointsField = findViewById(R.id.jkp_app_points_field)
-        playerPointsField = findViewById(R.id.jkp_player_points_field)
-        btnBackToMainMenu = findViewById(R.id.jkp_btn_back_main_screen)
+        imageApp = binding.jkpImageApp
+        resultField = binding.jkpResult
+        appPointsField = binding.jkpAppPointsField
+        playerPointsField = binding.jkpPlayerPointsField
+        btnBackToMainMenu = binding.jkpBtnBackMainScreen
 
         btnBackToMainMenu.setOnClickListener {
             finish()

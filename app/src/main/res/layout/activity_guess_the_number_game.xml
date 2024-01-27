@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/gtn_difficulty_chosen"
+        android:id="@+id/gtnDifficultyChosen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/subtitleColor"
@@ -41,7 +41,7 @@
         app:layout_constraintGuide_percent="0.20" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/gtn_text_input_layout"
+        android:id="@+id/gtnTextInputLayout"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -55,14 +55,14 @@
         app:layout_constraintTop_toTopOf="@+id/guideline5">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/gtn_guess_input_text"
+            android:id="@+id/gtnGuessInputText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/gtn_btn_guess"
+        android:id="@+id/gtnBtnGuess"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/gtn_guess_btn_text"
@@ -71,7 +71,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gtn_text_input_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/gtnTextInputLayout" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
@@ -88,14 +88,14 @@
         android:textSize="20sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
-        app:layout_constraintEnd_toStartOf="@+id/attempts_quantity"
+        app:layout_constraintEnd_toStartOf="@+id/attemptsQuantity"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
     <TextView
-        android:id="@+id/attempts_quantity"
+        android:id="@+id/attemptsQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -109,18 +109,18 @@
         app:layout_constraintTop_toTopOf="@+id/textView8" />
 
     <Button
-        android:id="@+id/gtn_btn_new_game"
+        android:id="@+id/gtnBtnNewGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/new_game"
-        app:layout_constraintBottom_toTopOf="@+id/gtn_btn_previous_screen"
+        app:layout_constraintBottom_toTopOf="@+id/gtnBtnPreviousScreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
     <Button
-        android:id="@+id/gtn_btn_previous_screen"
+        android:id="@+id/gtnBtnPreviousScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
@@ -145,7 +145,7 @@
         app:layout_constraintGuide_percent="0.60" />
 
     <TextView
-        android:id="@+id/gtn_win_text"
+        android:id="@+id/gtnWinText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

@@ -50,7 +50,7 @@
         app:layout_constraintGuide_percent="0.75" />
 
     <Button
-        android:id="@+id/mg_btn_back_main_screen"
+        android:id="@+id/mgBtnBackMainScreen"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/btn_back_main_screen"
@@ -62,29 +62,29 @@
         app:layout_constraintTop_toTopOf="@+id/guideline14" />
 
     <Button
-        android:id="@+id/mg_btn_singleplayer"
+        android:id="@+id/mgBtnSingleplayer"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="@string/mg_singleplayer"
-        app:layout_constraintBottom_toTopOf="@+id/mg_btn_2players"
+        app:layout_constraintBottom_toTopOf="@+id/mgBtnTwoPlayer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline13" />
 
     <Button
-        android:id="@+id/mg_btn_2players"
+        android:id="@+id/mgBtnTwoPlayer"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="@string/mg_2player"
-        app:layout_constraintBottom_toTopOf="@+id/mg_btn_countdown"
+        android:text="@string/mg_two_player"
+        app:layout_constraintBottom_toTopOf="@+id/mgBtnCountdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mg_btn_singleplayer" />
+        app:layout_constraintTop_toBottomOf="@+id/mgBtnSingleplayer" />
 
     <Button
-        android:id="@+id/mg_btn_countdown"
+        android:id="@+id/mgBtnCountdown"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="@string/mg_countdown"
@@ -92,5 +92,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mg_btn_2players" />
+        app:layout_constraintTop_toBottomOf="@+id/mgBtnTwoPlayer" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,27 +7,30 @@ import com.google.android.material.textfield.TextInputEditText
 import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputLayout
+import com.wcsm.touchgames.databinding.ActivityGuessTheNumberGameBinding
 import kotlin.random.Random
 
 class GuessTheNumberGameActivity : AppCompatActivity() {
 
+    private val binding by lazy {ActivityGuessTheNumberGameBinding.inflate(layoutInflater)}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_guess_the_number_game)
+        setContentView(binding.root)
 
         // Get Intent Data
         val bundle = intent.extras
         val difficulty = bundle?.getString("difficulty")
 
-        val guessInputText: TextInputEditText = findViewById(R.id.gtn_guess_input_text)
-        val guessTextInputLayout: TextInputLayout = findViewById(R.id.gtn_text_input_layout)
+        val guessInputText = binding.gtnGuessInputText
+        val guessTextInputLayout = binding.gtnTextInputLayout
 
-        val btnGuess: Button = findViewById(R.id.gtn_btn_guess)
-        val btnNewGame: Button = findViewById(R.id.gtn_btn_new_game)
-        val btnPreviousScreen: Button = findViewById(R.id.gtn_btn_previous_screen)
+        val btnGuess = binding.gtnBtnGuess
+        val btnNewGame = binding.gtnBtnNewGame
+        val btnPreviousScreen = binding.gtnBtnPreviousScreen
 
-        val attemptsQuantityField: TextView = findViewById(R.id.attempts_quantity)
-        val winTextField: TextView = findViewById(R.id.gtn_win_text)
+        val attemptsQuantityField = binding.attemptsQuantity
+        val winTextField = binding.gtnWinText
 
         val maxNumber = when(difficulty) {
             "easy" -> 5
@@ -88,7 +91,7 @@ class GuessTheNumberGameActivity : AppCompatActivity() {
     }
 
     private fun setDifficultyChoosen(difficulty: String?) {
-        val difficultyChosenField: TextView = findViewById(R.id.gtn_difficulty_chosen)
+        val difficultyChosenField = binding.gtnDifficultyChosen
 
         if (difficulty != null) {
             difficultyChosenField.text = when (difficulty) {

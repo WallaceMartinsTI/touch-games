@@ -8,36 +8,34 @@ import com.wcsm.touchgames.guessthenumber.GuessTheNumberMenuActivity
 import com.wcsm.touchgames.jokenpo.JokenpoActivity
 
 import com.google.gson.Gson
+import com.wcsm.touchgames.databinding.ActivityMainBinding
 import com.wcsm.touchgames.memorygame.MemoryGameMenuActivity
 
 class MainActivity : AppCompatActivity() {
 
-    var arr = arrayListOf<String>()
+    private val binding by lazy {ActivityMainBinding.inflate(layoutInflater)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
         // Open Games Buttons
-        val btnOpenGuessTheNumber: Button = findViewById(R.id.btn_open_guess_the_number)
-        val btnOpenJokenpo: Button = findViewById(R.id.btn_open_jokenpo)
-        val btnOpenMemoryGame: Button = findViewById(R.id.btn_open_memory_game)
+        with(binding) {
+            btnOpenGuessTheNumber.setOnClickListener {
+                val intent = Intent(applicationContext, GuessTheNumberMenuActivity::class.java)
+                startActivity(intent)
+            }
 
+            btnOpenJokenpo.setOnClickListener {
+                val intent = Intent(applicationContext, JokenpoActivity::class.java)
+                startActivity(intent)
+            }
 
-        btnOpenGuessTheNumber.setOnClickListener {
-            val intent = Intent(this, GuessTheNumberMenuActivity::class.java)
-            startActivity(intent)
-        }
-
-        btnOpenJokenpo.setOnClickListener {
-            val intent = Intent(this, JokenpoActivity::class.java)
-            startActivity(intent)
-        }
-
-        btnOpenMemoryGame.setOnClickListener {
-            val intent = Intent(this, MemoryGameMenuActivity::class.java)
-            startActivity(intent)
+            btnOpenMemoryGame.setOnClickListener {
+                val intent = Intent(applicationContext, MemoryGameMenuActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         // JSON

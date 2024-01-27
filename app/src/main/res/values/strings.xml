@@ -38,7 +38,7 @@
     <!-- GAME - MEMORY GAME -->
     <string name="mg_game_title">Jogo da Memória</string>
     <string name="mg_singleplayer">Sozinho (pontos e tempo)</string>
-    <string name="mg_2player">2 Jogadores (P1 e P2)</string>
+    <string name="mg_two_player">2 Jogadores (P1 e P2)</string>
     <string name="mg_countdown">Contagem Regressiva \n(pontos = +tempo)</string>
     <string name="mg_rv_content_description">Lista com as cartas</string>
 

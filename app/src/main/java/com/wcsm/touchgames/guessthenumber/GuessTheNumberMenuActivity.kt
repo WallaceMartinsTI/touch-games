@@ -5,19 +5,22 @@ import android.os.Bundle
 import com.wcsm.touchgames.R
 import android.widget.Button
 import android.content.Intent
+import com.wcsm.touchgames.databinding.ActivityGuessTheNumberMenuBinding
 
 class GuessTheNumberMenuActivity : AppCompatActivity() {
 
+    private val binding by lazy {ActivityGuessTheNumberMenuBinding.inflate(layoutInflater)}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_guess_the_number_menu)
+        setContentView(binding.root)
 
-        val btnEasyDifficult: Button = findViewById(R.id.gtn_btn_easy_difficult)
-        val btnMediumDifficult: Button = findViewById(R.id.gtn_btn_medium_difficult)
-        val btnHardDifficult: Button = findViewById(R.id.gtn_btn_hard_difficult)
-        val btnInsaneDifficult: Button = findViewById(R.id.gtn_btn_insane_difficult)
+        val btnEasyDifficult = binding.gtnBtnEasyDifficulty
+        val btnMediumDifficult = binding.gtnBtnMediumDifficulty
+        val btnHardDifficult = binding.gtnBtnHardDifficulty
+        val btnInsaneDifficult = binding.gtnBtnInsaneDifficulty
 
-        val btnBackToMainMenu: Button = findViewById(R.id.gtn_btn_back_main_screen)
+        val btnBackToMainMenu = binding.gtnBtnBackMainScreen
 
         val intent = Intent(this, GuessTheNumberGameActivity::class.java)
 
