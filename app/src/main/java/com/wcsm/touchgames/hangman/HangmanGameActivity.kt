@@ -1,12 +1,14 @@
 package com.wcsm.touchgames.hangman
 
 import android.app.AlertDialog
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.ViewCompat
 import com.google.gson.Gson
 import com.wcsm.touchgames.R
 import com.wcsm.touchgames.databinding.ActivityHangmanGameBinding
@@ -72,6 +74,9 @@ class HangmanGameActivity : AppCompatActivity() {
     }
 
     private fun setInitialStates() {
+        // Disable Guess Field AutoFill
+        ViewCompat.setImportantForAutofill(binding.hmEditText, View.IMPORTANT_FOR_AUTOFILL_NO)
+
         binding.hmPoints.text = "Pontuação: 0"
         binding.hmCorrectWordsCounter.text = "Palavras Corretas: $correctWordsCount"
         binding.hmGameOver.visibility = View.INVISIBLE

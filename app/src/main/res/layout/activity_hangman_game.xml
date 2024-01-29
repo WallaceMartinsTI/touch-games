@@ -132,13 +132,12 @@
         android:id="@+id/hmBtnCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
         android:backgroundTint="#4CAF50"
         android:text="@string/hm_guess_a_letter"
+        app:layout_constraintBottom_toBottomOf="@+id/hmGuessInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline21"
-        app:layout_constraintTop_toBottomOf="@+id/hmTip" />
+        app:layout_constraintTop_toTopOf="@+id/hmGuessInputLayout" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/hmGuessInputLayout"
