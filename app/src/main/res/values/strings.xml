@@ -11,6 +11,7 @@
     <string name="guess_the_number">Adivinhe o Número</string>
     <string name="jokenpo">Jokenpo</string>
     <string name="memory_game">Jogo da Memória</string>
+    <string name="hangman">Jogo da Forca</string>
 
     <!-- GAME - GUESS THE NUMBER (GTN) -->
     <string name="gtn_game_title">Adivinhe o Número</string>
@@ -42,6 +43,12 @@
     <string name="mg_countdown">Contagem Regressiva \n(pontos = +tempo)</string>
     <string name="mg_rv_content_description">Lista com as cartas</string>
 
+    <!-- GAME - HANGMAN -->
+    <string name="hm_game_title">Jogo da Forca</string>
+    <string name="hm_mode_time">Pontuação Com Tempo</string>
+    <string name="hm_mode_no_time">Pontuação Sem Tempo</string>
+    <string name="hm_guess_a_letter">Tentar a letra</string>
+
     <!-- GENERAL -->
     <string name="back_main_screen">Voltar a tela inicial</string>
     <string name="select_difficulty">Selecione a dificuldade</string>
@@ -49,5 +56,4 @@
     <string name="new_game">Novo Jogo</string>
     <string name="endgame">Finalizar Jogo</string>
     <string name="back_previous_screen">Voltar a tela anterior</string>
-
 </resources>

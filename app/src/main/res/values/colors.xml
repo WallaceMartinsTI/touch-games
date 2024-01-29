@@ -10,5 +10,5 @@
     <color name="btn_back_main_screen">#18263A</color>
 
     <!-- GAME - MEMORY GAME -->
-    <color name="mg_player_turn">#FFD700</color>
+    <color name="gold_color">#FFD700</color>
 </resources>

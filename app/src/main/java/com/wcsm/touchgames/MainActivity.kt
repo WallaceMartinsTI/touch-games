@@ -3,12 +3,12 @@ package com.wcsm.touchgames
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import com.wcsm.touchgames.guessthenumber.GuessTheNumberMenuActivity
 import com.wcsm.touchgames.jokenpo.JokenpoActivity
 
 import com.google.gson.Gson
 import com.wcsm.touchgames.databinding.ActivityMainBinding
+import com.wcsm.touchgames.hangman.HangmanMenuActivity
 import com.wcsm.touchgames.memorygame.MemoryGameMenuActivity
 
 class MainActivity : AppCompatActivity() {
@@ -23,24 +23,25 @@ class MainActivity : AppCompatActivity() {
         // Open Games Buttons
         with(binding) {
             btnOpenGuessTheNumber.setOnClickListener {
-                val intent = Intent(applicationContext, GuessTheNumberMenuActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(applicationContext, GuessTheNumberMenuActivity::class.java))
             }
 
             btnOpenJokenpo.setOnClickListener {
-                val intent = Intent(applicationContext, JokenpoActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(applicationContext, JokenpoActivity::class.java))
             }
 
             btnOpenMemoryGame.setOnClickListener {
-                val intent = Intent(applicationContext, MemoryGameMenuActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(applicationContext, MemoryGameMenuActivity::class.java))
+            }
+
+            btnOpenHangman.setOnClickListener {
+                startActivity(Intent(applicationContext, HangmanMenuActivity::class.java))
             }
         }
 
         // JSON
         val assetManager = assets
-        val inputStream = assetManager.open("words.json")
+        val inputStream = assetManager.open("hm_words.json")
         val json = inputStream.bufferedReader().use { it.readText() }
 
         data class Words(

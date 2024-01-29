@@ -103,13 +103,13 @@
                 android:text="@string/memory_game" />
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/btnOpenHangman"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
-                android:text="@string/coming_soon_games" />
+                android:text="@string/hangman" />
 
             <Button
                 android:id="@+id/button7"

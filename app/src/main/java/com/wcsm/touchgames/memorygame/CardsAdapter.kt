@@ -57,7 +57,7 @@ class CardsAdapter(
     private var playerTurn: PlayerTurn? = null //PlayerTurn.PLAYER1
     private var firstPlayerCombinations = 0
     private var secondPlayerCombinations = 0
-    private var playerTurnColor = ContextCompat.getColor(context, R.color.mg_player_turn)
+    private var playerTurnColor = ContextCompat.getColor(context, R.color.gold_color)
     private var playerDefaultColor = ContextCompat.getColor(context, R.color.black)
 
     // Countdown Variables

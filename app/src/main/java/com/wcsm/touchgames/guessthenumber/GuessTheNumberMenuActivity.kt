@@ -15,34 +15,29 @@ class GuessTheNumberMenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val btnEasyDifficult = binding.gtnBtnEasyDifficulty
-        val btnMediumDifficult = binding.gtnBtnMediumDifficulty
-        val btnHardDifficult = binding.gtnBtnHardDifficulty
-        val btnInsaneDifficult = binding.gtnBtnInsaneDifficulty
-
-        val btnBackToMainMenu = binding.gtnBtnBackMainScreen
-
         val intent = Intent(this, GuessTheNumberGameActivity::class.java)
 
-        btnBackToMainMenu.setOnClickListener {
-            finish()
-        }
-
         // Difficult Buttons
-        btnEasyDifficult.setOnClickListener {
-            startGame(intent, GTNDifficulties.EASY)
-        }
+        with(binding) {
+            gtnBtnBackMainScreen.setOnClickListener {
+                finish()
+            }
 
-        btnMediumDifficult.setOnClickListener {
-            startGame(intent, GTNDifficulties.MEDIUM)
-        }
+            gtnBtnEasyDifficulty.setOnClickListener {
+                startGame(intent, GTNDifficulties.EASY)
+            }
 
-        btnHardDifficult.setOnClickListener {
-            startGame(intent, GTNDifficulties.HARD)
-        }
+            gtnBtnMediumDifficulty.setOnClickListener {
+                startGame(intent, GTNDifficulties.MEDIUM)
+            }
 
-        btnInsaneDifficult.setOnClickListener {
-            startGame(intent,  GTNDifficulties.INSANE)
+            gtnBtnHardDifficulty.setOnClickListener {
+                startGame(intent, GTNDifficulties.HARD)
+            }
+
+            gtnBtnInsaneDifficulty.setOnClickListener {
+                startGame(intent,  GTNDifficulties.INSANE)
+            }
         }
     }
 

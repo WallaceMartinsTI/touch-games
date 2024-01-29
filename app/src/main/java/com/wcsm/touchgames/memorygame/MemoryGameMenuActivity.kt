@@ -17,30 +17,25 @@ class MemoryGameMenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val btnSingleplayer = binding.mgBtnSingleplayer
-        val btnTwoPlayers = binding.mgBtnTwoPlayer
-        val btnCountdown = binding.mgBtnCountdown
-
-        val btnBackToMainMenu = binding.mgBtnBackMainScreen
-
         val intent = Intent(this, MemoryGameGameActivity::class.java)
 
-        btnBackToMainMenu.setOnClickListener {
-            finish()
-        }
+        with(binding) {
+            mgBtnBackMainScreen.setOnClickListener {
+                finish()
+            }
 
-        btnSingleplayer.setOnClickListener {
-            startGame(intent, MemoryGameGameTypes.SINGLEPLAYER)
-        }
+            mgBtnSingleplayer.setOnClickListener {
+                startGame(intent, MemoryGameGameTypes.SINGLEPLAYER)
+            }
 
-        btnTwoPlayers.setOnClickListener {
-            startGame(intent, MemoryGameGameTypes.TWOPLAYERS)
-        }
+            mgBtnTwoPlayer.setOnClickListener {
+                startGame(intent, MemoryGameGameTypes.TWOPLAYERS)
+            }
 
-        btnCountdown.setOnClickListener {
-            startGame(intent, MemoryGameGameTypes.COUNTDOWN)
+            mgBtnCountdown.setOnClickListener {
+                startGame(intent, MemoryGameGameTypes.COUNTDOWN)
+            }
         }
-
     }
 
     private fun startGame(intent: Intent, gameType: MemoryGameGameTypes) {
