@@ -45,9 +45,9 @@
 
     <!-- GAME - HANGMAN -->
     <string name="hm_game_title">Jogo da Forca</string>
-    <string name="hm_mode_time">Pontuação Com Tempo</string>
-    <string name="hm_mode_no_time">Pontuação Sem Tempo</string>
     <string name="hm_guess_a_letter">Tentar a letra</string>
+    <string name="hm_guess_hint">Palpite</string>
+    <string name="hm_game_over_text">FIM DE JOGO</string>
 
     <!-- GENERAL -->
     <string name="back_main_screen">Voltar a tela inicial</string>

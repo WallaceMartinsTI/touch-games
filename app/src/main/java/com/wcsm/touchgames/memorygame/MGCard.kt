@@ -1,5 +1,5 @@
 package com.wcsm.touchgames.memorygame
 
-data class Card (var imageSrc: Int) {
+data class MGCard (var imageSrc: Int) {
     var isMatched: Boolean = false
 }

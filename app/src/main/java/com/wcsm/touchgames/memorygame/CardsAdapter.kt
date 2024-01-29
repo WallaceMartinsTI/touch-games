@@ -26,19 +26,19 @@ enum class PlayerTurn {
 
 class CardsAdapter(
     private val context: Context,
-    private var list: MutableList<Card>,
+    private var list: MutableList<MGCard>,
     private val gameType: MemoryGameGameTypes?,
     private var textView1: TextView,
     private var textView2: TextView,
     private val endgameButton: Button
 ) : Adapter<CardsAdapter.CardsViewHolder>() {
-    private val initialCard = Card(0)
+    private val initialMGCard = MGCard(0)
     private var plays = 0
     private var cardsMatched = false
 
     private val handler = Handler()
 
-    private var selectedCard = initialCard;
+    private var selectedCard = initialMGCard;
     private var selectedCardImageView: ImageView? = null
 
     private var previousItemView: View? = null
@@ -101,7 +101,7 @@ class CardsAdapter(
     inner class CardsViewHolder(val binding: MgCardsBinding) : ViewHolder(binding.root) {
         private val cardDefault = binding.mgCardDefault
 
-        fun bind(card: Card) {
+        fun bind(mgCard: MGCard) {
             cardDefault.setImageResource(R.drawable.mg_card_back) // original methods (show cards hidden)
             //cardDefault.setImageResource(card.imageSrc) // code to show cards
             cardsDefaultList.add(cardDefault)
@@ -111,16 +111,16 @@ class CardsAdapter(
 
                 if (clicksCounter <= 2) {
                     // Cards Manipulation
-                    cardDefault.setImageResource(card.imageSrc)
+                    cardDefault.setImageResource(mgCard.imageSrc)
 
-                    if (card == selectedCard) {
+                    if (mgCard == selectedCard) {
                         // Wait 1 second before turn cards invisible
                         handler.postDelayed({
 
                             itemViewList.add(previousItemView!!)
                             itemViewList.add(itemView)
 
-                            card.isMatched = true
+                            mgCard.isMatched = true
                             selectedCard.isMatched = true
 
                             // PreviousItem
@@ -137,7 +137,7 @@ class CardsAdapter(
                             previousItemView = null
                             cardsMatched = true
 
-                            selectedCard = initialCard
+                            selectedCard = initialMGCard
                             plays = 0
 
                             // Pontuation and Time Manipulation
@@ -172,7 +172,7 @@ class CardsAdapter(
                             clicksCounter = 0
                         }, 1000)
                     } else {
-                        selectedCard = card
+                        selectedCard = mgCard
 
                         if (plays == 0) {
                             selectedCardImageView = cardDefault
@@ -219,7 +219,7 @@ class CardsAdapter(
                                 clicksCounter = 0
                             }, 1000)
 
-                            selectedCard = initialCard
+                            selectedCard = initialMGCard
                         } else {
                             plays++
                         }
@@ -329,16 +329,16 @@ class CardsAdapter(
             .setPositiveButton("Novo Jogo") { dialog, _ ->
                 // Code to be executed when the "Novo Jogo" button is clicked
                 val intent = Intent(context, MemoryGameMenuActivity::class.java)
-                context.startActivity(intent)
-
+                
                 dialog.dismiss()
+                context.startActivity(intent)
             }
             .setNegativeButton("Menu Inicial") { dialog, _ ->
                 // Code to be executed when the "Menu Inicial" button is clicked
                 val intent = Intent(context, MainActivity::class.java)
-                context.startActivity(intent)
-
+                
                 dialog.dismiss()
+                context.startActivity(intent)
             }
             .show()
     }
@@ -391,7 +391,7 @@ class CardsAdapter(
         Toast.makeText(context, "+$formattedSeconds segundos!", Toast.LENGTH_SHORT).show()
     }
 
-    fun resetCards(newList: MutableList<Card>) {
+    fun resetCards(newList: MutableList<MGCard>) {
         list.forEach {
             it.isMatched = false
         }
