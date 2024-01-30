@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -57,6 +56,7 @@ class HangmanGameActivity : AppCompatActivity() {
             }
 
             hmBtnEndgame.setOnClickListener {
+                hmBtnEndgame.isEnabled = false
                 endGameDialog()
             }
 
@@ -299,7 +299,6 @@ class HangmanGameActivity : AppCompatActivity() {
             hmWord.text = replacedWord
             hmTip.text = chosenCategory
         }
-        Log.i("hangmanm", "chosenWord: $chosenWord")
     }
 
     private fun gameOver() {
@@ -322,6 +321,10 @@ class HangmanGameActivity : AppCompatActivity() {
             .setNegativeButton("Menu Inicial") {dialog, _ ->
                 dialog.dismiss()
                 finish()
+            }
+            .setOnDismissListener {
+                binding.hmGuessInputLayout.error = null
+                binding.hmBtnEndgame.isEnabled = true
             }
             .show()
     }
