@@ -7,6 +7,7 @@ Touch Games é um projeto para praticar o conheciento que venho adquirindo em de
 - Adivinhe o Número
 - Pedra, Papel e Tesoura (Jokenpo)
 - Jogo da Memória Personalizado
+- Jogo da Forca
 
 ## 📄 Licença
 
