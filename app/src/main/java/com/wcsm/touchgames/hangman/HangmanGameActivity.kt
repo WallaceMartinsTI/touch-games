@@ -295,9 +295,11 @@ class HangmanGameActivity : AppCompatActivity() {
             }
         }
 
+        val wordLength = chosenWord.replace(" ", "").length
+
         with(binding) {
             hmWord.text = replacedWord
-            hmTip.text = "$chosenCategory (${chosenCategory.replace(" ", "").length})"
+            hmTip.text = "$chosenCategory ($wordLength)"
         }
     }
 
