@@ -297,7 +297,7 @@ class HangmanGameActivity : AppCompatActivity() {
 
         with(binding) {
             hmWord.text = replacedWord
-            hmTip.text = chosenCategory
+            hmTip.text = "$chosenCategory (${chosenCategory.replace(" ", "").length})"
         }
     }
 
@@ -305,8 +305,9 @@ class HangmanGameActivity : AppCompatActivity() {
         with(binding) {
             hmGuessInputLayout.isEnabled = false
             hmBtnCheck.isEnabled = false
-            binding.hmGameOver.visibility = View.VISIBLE
-            binding.hmBtnEndgame.isEnabled = true
+            hmGameOver.visibility = View.VISIBLE
+            hmBtnEndgame.isEnabled = true
+            hmWord.text = chosenWord
         }
     }
 
